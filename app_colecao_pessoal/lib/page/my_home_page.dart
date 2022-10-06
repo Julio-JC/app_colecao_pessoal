@@ -1,4 +1,6 @@
 import 'package:app_colecao_pessoal/button_home_page.dart';
+import 'package:app_colecao_pessoal/page/my_books_list.dart';
+import 'package:app_colecao_pessoal/page/my_moves_list.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -11,7 +13,41 @@ class MyHomePage extends StatelessWidget {
         centerTitle: true,
         title: const Text('Minha Coleção'),
       ),
-      drawer: Drawer(child: Column()),
+      drawer: Drawer(
+          child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    print('Catalogo de Filmes');
+                  },
+                  icon: const Icon(
+                    Icons.local_movies,
+                  ),
+                ),
+                const Text('Filmes'),
+              ],
+            ),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    print('Catalogo de Livros');
+                  },
+                  icon: const Icon(
+                    Icons.book,
+                  ),
+                ),
+                const Text('Lovros'),
+              ],
+            )
+          ],
+        ),
+      )),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -38,18 +74,40 @@ class MyHomePage extends StatelessWidget {
             children: [
               ButtonHomePage(
                 icon: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const MyMovesList();
+                        },
+                      ),
+                    );
+                    print('Catalogo de filmes');
+                  },
                   icon: const Icon(
-                    Icons.videocam_outlined,
+                    Icons.local_movies,
+                    size: 100,
                   ),
                 ),
                 image: 'assets/image/filme_botão2.jpg',
               ),
               ButtonHomePage(
                 icon: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const MyBooksList();
+                        },
+                      ),
+                    );
+                    print('Catalogo de livro');
+                  },
                   icon: const Icon(
                     Icons.book,
+                    size: 100,
                   ),
                 ),
                 image: 'assets/image/livro_botao.jpg',

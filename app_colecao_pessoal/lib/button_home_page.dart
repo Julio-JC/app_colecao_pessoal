@@ -13,18 +13,34 @@ class ButtonHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      alignment: AlignmentDirectional.center,
       children: [
         Container(
-          margin: EdgeInsets.all(10),
+          margin: const EdgeInsets.all(10),
           height: 200,
           width: 180,
           decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover),
+            borderRadius: BorderRadius.circular(16),
+            image: DecorationImage(
+              image: AssetImage(image),
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         Container(
           height: 200,
           width: 180,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            color: Color.fromARGB(129, 144, 202, 249),
+          ),
+        ),
+        Container(
+          height: 200,
+          width: 180,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+          ),
           child: icon,
         ),
       ],
