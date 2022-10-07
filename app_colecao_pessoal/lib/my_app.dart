@@ -17,6 +17,8 @@ class MyApp extends StatelessWidget {
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: kColorMyApp,
         ),
+        scaffoldBackgroundColor: kColorScaffold,
+        cardColor: kColorCard,
       ),
       home: const MyHomePage(),
     );

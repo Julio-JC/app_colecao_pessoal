@@ -1,7 +1,8 @@
 import 'package:app_colecao_pessoal/button_home_page.dart';
-import 'package:app_colecao_pessoal/page/my_books_list.dart';
-import 'package:app_colecao_pessoal/page/my_moves_list.dart';
+import 'package:app_colecao_pessoal/page/my_books_list_page.dart';
+import 'package:app_colecao_pessoal/page/my_moves_list_page.dart';
 import 'package:flutter/material.dart';
+import '../global/const.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
@@ -14,40 +15,41 @@ class MyHomePage extends StatelessWidget {
         title: const Text('Minha Coleção'),
       ),
       drawer: Drawer(
-          child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                IconButton(
-                  onPressed: () {
-                    print('Catalogo de Filmes');
-                  },
-                  icon: const Icon(
-                    Icons.local_movies,
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      print('Catalogo de Filmes');
+                    },
+                    icon: const Icon(
+                      Icons.local_movies,
+                    ),
                   ),
-                ),
-                const Text('Filmes'),
-              ],
-            ),
-            Row(
-              children: [
-                IconButton(
-                  onPressed: () {
-                    print('Catalogo de Livros');
-                  },
-                  icon: const Icon(
-                    Icons.book,
+                  const Text('Filmes'),
+                ],
+              ),
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      print('Catalogo de Livros');
+                    },
+                    icon: const Icon(
+                      Icons.book,
+                    ),
                   ),
-                ),
-                const Text('Lovros'),
-              ],
-            )
-          ],
+                  const Text('Lovros'),
+                ],
+              )
+            ],
+          ),
         ),
-      )),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -61,13 +63,7 @@ class MyHomePage extends StatelessWidget {
         ],
       ),
       body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(
-                'assets/image/filme_fundo2.jpg',
-              ),
-              fit: BoxFit.cover),
-        ),
+        decoration: const BoxDecoration(),
         child: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -79,7 +75,7 @@ class MyHomePage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const MyMovesList();
+                          return const MyMovesListPage();
                         },
                       ),
                     );
@@ -99,7 +95,7 @@ class MyHomePage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const MyBooksList();
+                          return const MyBooksListPage();
                         },
                       ),
                     );

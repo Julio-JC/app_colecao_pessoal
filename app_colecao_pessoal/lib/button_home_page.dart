@@ -32,7 +32,7 @@ class ButtonHomePage extends StatelessWidget {
           width: 180,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-            color: Color.fromARGB(129, 144, 202, 249),
+            color: const Color.fromARGB(129, 144, 202, 249),
           ),
         ),
         Container(

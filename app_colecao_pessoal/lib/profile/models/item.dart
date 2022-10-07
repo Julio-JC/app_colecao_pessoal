@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
+
 class Item {
   Item({
+    required this.icone,
     required this.titulo,
     required this.autorDiretor,
     required this.anoDeLancamentoPublicacao,
@@ -9,9 +12,10 @@ class Item {
     required this.notaDoUsuario,
   });
 
+  Icon icone;
   String titulo;
   String autorDiretor;
-  int anoDeLancamentoPublicacao;
+  DateTime anoDeLancamentoPublicacao;
   String produtoraEditora;
   String sinopse;
   String genero;

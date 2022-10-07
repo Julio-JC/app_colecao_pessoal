@@ -1,11 +1,24 @@
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
+import '../profile/models/item.dart';
 
+// ignore: must_be_immutable
 class ListItem extends StatelessWidget {
-  const ListItem({super.key});
+  ListItem({super.key, required this.item});
+
+  Item item;
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      margin: const EdgeInsets.all(8),
+      child: Column(
+        children: [
+          item.icone,
+          Text(
+            item.titulo,
+          ),
+        ],
+      ),
+    );
   }
 }
