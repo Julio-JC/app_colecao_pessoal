@@ -13,7 +13,7 @@ class AddMovePage extends StatefulWidget {
     DateTime,
     String,
     String,
-    TagGenero,
+    String,
     int,
   ) aoSubimeter;
 
@@ -27,7 +27,7 @@ class _AddMovePageState extends State<AddMovePage> {
   DateTime data = DateTime.now();
   final TextEditingController produtoraController = TextEditingController();
   final TextEditingController sinopseController = TextEditingController();
-  TagGenero genero = TagGenero(genero: '');
+  String? _genero;
   int? _classificacao;
 
   submeterItem() {
@@ -36,7 +36,7 @@ class _AddMovePageState extends State<AddMovePage> {
     final produtoraDoFilme = produtoraController.text;
     final sinopseDoFilme = sinopseController.text;
     final dataFilme = data;
-    final generoFilme = genero;
+    final generoFilme = _genero;
     final estrelas = _classificacao;
 
     if (tituloDoFilme.isEmpty) {
@@ -49,14 +49,15 @@ class _AddMovePageState extends State<AddMovePage> {
       dataFilme,
       produtoraDoFilme,
       sinopseDoFilme,
-      generoFilme,
+      generoFilme!,
       estrelas!,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return SafeArea(
+      child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
           title: const Text(
@@ -64,7 +65,7 @@ class _AddMovePageState extends State<AddMovePage> {
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(16),
           child: Card(
             child: Column(
               children: [
@@ -156,14 +157,30 @@ class _AddMovePageState extends State<AddMovePage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TagGenero(genero: 'Ação'),
-                      TagGenero(genero: 'Drama'),
-                      TagGenero(genero: 'Ficção'),
-                      TagGenero(genero: 'Fantasia'),
+                      TagGenero(
+                          genero: 'Ação',
+                          aoPessionar: (aoPessionar) {
+                            _genero = aoPessionar;
+                          }),
+                      TagGenero(
+                          genero: 'Drama',
+                          aoPessionar: (aoPessionar) {
+                            _genero = aoPessionar;
+                          }),
+                      TagGenero(
+                          genero: 'Ficção',
+                          aoPessionar: (aoPessionar) {
+                            _genero = aoPessionar;
+                          }),
+                      TagGenero(
+                          genero: 'Fantasia',
+                          aoPessionar: (aoPessionar) {
+                            _genero = aoPessionar;
+                          }),
                     ],
                   ),
                 ),
-                //Criar uma avaliação por extrelas
+
                 WidgetDeClassificacao(
                   aoSelecClassificacao: (aoSelecClassificacao) {
                     setState(() {
@@ -204,6 +221,8 @@ class _AddMovePageState extends State<AddMovePage> {
               ],
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

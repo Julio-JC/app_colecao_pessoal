@@ -21,7 +21,7 @@ class _minhaListaDeFilmesState extends State<minhaListaDeFilmes> {
     DateTime anoLancamento,
     String produtora,
     String sinopse,
-    TagGenero genero,
+    String genero,
     int nota,
   ) {
     final novoItem = Item(

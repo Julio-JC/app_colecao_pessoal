@@ -39,12 +39,12 @@ class _WidgetDeClassificacaoState extends State<WidgetDeClassificacao> {
             setState(() {
               _classificacaoAtual = index + 1;
             });
-            print(_classificacaoAtual);
             widget.aoSelecClassificacao(_classificacaoAtual);
           },
         );
       },
     );
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: stars,

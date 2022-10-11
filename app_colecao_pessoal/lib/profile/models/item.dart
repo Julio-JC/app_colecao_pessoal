@@ -18,6 +18,6 @@ class Item {
   DateTime anoDeLancamentoPublicacao;
   String produtoraEditora;
   String sinopse;
-  TagGenero generoDoItem;
+  String generoDoItem;
   int notaDoUsuario;
 }

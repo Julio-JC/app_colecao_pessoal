@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class TagGenero extends StatefulWidget {
-  TagGenero({super.key, required this.genero, this.aoPessionar});
+  TagGenero({super.key, required this.genero, required this.aoPessionar});
 
   String genero;
   final Function(String)? aoPessionar;
