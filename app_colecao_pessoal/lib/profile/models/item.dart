@@ -1,23 +1,23 @@
-import 'package:flutter/cupertino.dart';
+import '../../widget/tag_genero.dart';
 
 class Item {
   Item({
-    required this.icone,
+    required this.id,
     required this.titulo,
     required this.autorDiretor,
     required this.anoDeLancamentoPublicacao,
     required this.produtoraEditora,
     required this.sinopse,
-    required this.genero,
+    required this.generoDoItem,
     required this.notaDoUsuario,
   });
 
-  Icon icone;
+  String id;
   String titulo;
   String autorDiretor;
   DateTime anoDeLancamentoPublicacao;
   String produtoraEditora;
   String sinopse;
-  String genero;
+  TagGenero generoDoItem;
   int notaDoUsuario;
 }

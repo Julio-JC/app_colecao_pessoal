@@ -1,8 +1,7 @@
 import 'package:app_colecao_pessoal/button_home_page.dart';
 import 'package:app_colecao_pessoal/page/my_books_list_page.dart';
-import 'package:app_colecao_pessoal/page/my_moves_list_page.dart';
+import 'package:app_colecao_pessoal/page/minha_lista_de_filmes.dart';
 import 'package:flutter/material.dart';
-import '../global/const.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
@@ -75,7 +74,7 @@ class MyHomePage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const MyMovesListPage();
+                          return const minhaListaDeFilmes();
                         },
                       ),
                     );
