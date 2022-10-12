@@ -65,7 +65,7 @@ class ItemDaLista extends StatelessWidget {
                     selected: true,
                     selectedColor: Colors.blue[100],
                   ),
-                  const SizedBox(width: 50),
+                  const SizedBox(width: 80),
                   const Icon(
                     Icons.star,
                     color: Colors.blue,

@@ -1,18 +1,17 @@
 import 'dart:math';
-import 'package:app_colecao_pessoal/page/add_move_page.dart';
+import 'package:app_colecao_pessoal/page/pagina_add_filme.dart';
 import 'package:flutter/material.dart';
 import '../profile/models/item.dart';
 import '../widget/item_da_lista.dart';
-import '../widget/tag_genero.dart';
 
-class minhaListaDeFilmes extends StatefulWidget {
-  const minhaListaDeFilmes({super.key});
+class MinhaListaDeFilmes extends StatefulWidget {
+  const MinhaListaDeFilmes({super.key});
 
   @override
-  State<minhaListaDeFilmes> createState() => _minhaListaDeFilmesState();
+  State<MinhaListaDeFilmes> createState() => _MinhaListaDeFilmesState();
 }
 
-class _minhaListaDeFilmesState extends State<minhaListaDeFilmes> {
+class _MinhaListaDeFilmesState extends State<MinhaListaDeFilmes> {
   final List<Item> itens = [];
 
   adicionarItem(
@@ -86,7 +85,7 @@ class _minhaListaDeFilmesState extends State<minhaListaDeFilmes> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return AddMovePage(aoSubimeter: adicionarItem);
+                        return PaginaAddFilme(aoSubimeter: adicionarItem);
                       },
                     ),
                   );

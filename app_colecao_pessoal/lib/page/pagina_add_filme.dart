@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
 
-class AddMovePage extends StatefulWidget {
-  const AddMovePage({super.key, required this.aoSubimeter});
+class PaginaAddFilme extends StatefulWidget {
+  const PaginaAddFilme({super.key, required this.aoSubimeter});
 
   final Function(
     String,
@@ -18,10 +18,10 @@ class AddMovePage extends StatefulWidget {
   ) aoSubimeter;
 
   @override
-  State<AddMovePage> createState() => _AddMovePageState();
+  State<PaginaAddFilme> createState() => _AddMovePageState();
 }
 
-class _AddMovePageState extends State<AddMovePage> {
+class _AddMovePageState extends State<PaginaAddFilme> {
   final TextEditingController tituloController = TextEditingController();
   final TextEditingController diretorController = TextEditingController();
   DateTime data = DateTime.now();
@@ -33,9 +33,9 @@ class _AddMovePageState extends State<AddMovePage> {
   submeterItem() {
     final tituloDoFilme = tituloController.text;
     final diretorDoFilme = diretorController.text;
+    final dataFilme = data;
     final produtoraDoFilme = produtoraController.text;
     final sinopseDoFilme = sinopseController.text;
-    final dataFilme = data;
     final generoFilme = _genero;
     final estrelas = _classificacao;
 
@@ -105,22 +105,27 @@ class _AddMovePageState extends State<AddMovePage> {
                           ),
                           child: Center(
                               child: IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      showDatePicker(
-                                        initialDatePickerMode:
-                                            DatePickerMode.year,
-                                        context: context,
-                                        initialDate: data,
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime(2100),
-                                      );
-                                    });
+                                  onPressed: () async {
+                                    final dataLancamento = await showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime.now(),
+                                      lastDate: DateTime(2100),
+                                      firstDate: DateTime(1900),
+                                    );
+
+                                    if (dataLancamento != null &&
+                                        dataLancamento != data) {
+                                      setState(() {
+                                        data = dataLancamento;
+                                      });
+
+                                      print(dataLancamento);
+                                    }
                                   },
                                   icon: const Icon(Icons.date_range_outlined))),
                         ),
                         Container(
-                          padding: EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(15),
                           height: 50,
                           width: 120,
                           decoration: BoxDecoration(

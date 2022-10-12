@@ -1,5 +1,5 @@
 import 'package:app_colecao_pessoal/button_home_page.dart';
-import 'package:app_colecao_pessoal/page/my_books_list_page.dart';
+import 'package:app_colecao_pessoal/page/minha_lista_de_livros.dart';
 import 'package:app_colecao_pessoal/page/minha_lista_de_filmes.dart';
 import 'package:flutter/material.dart';
 
@@ -74,7 +74,7 @@ class MyHomePage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const minhaListaDeFilmes();
+                          return const MinhaListaDeFilmes();
                         },
                       ),
                     );
@@ -94,7 +94,7 @@ class MyHomePage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const MyBooksListPage();
+                          return const MinhaListaDeLivros();
                         },
                       ),
                     );

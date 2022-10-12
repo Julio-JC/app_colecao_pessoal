@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../profile/models/item.dart';
+import 'package:intl/intl.dart';
 
 class PaginaConteudoDoFilme extends StatelessWidget {
   PaginaConteudoDoFilme({super.key, this.item});
@@ -17,7 +18,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Card(
           child: Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -40,12 +41,15 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(
-                  height: 15,
+                  height: 30,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Titulo: '),
+                    const Text(
+                      'Titulo: ',
+                      style: TextStyle(fontSize: 16),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: SizedBox(
@@ -62,10 +66,13 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                   height: 30,
                   color: Colors.blue,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Doretor: '),
+                    const Text(
+                      'Doretor: ',
+                      style: TextStyle(fontSize: 16),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: SizedBox(
@@ -82,10 +89,13 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                   height: 30,
                   color: Colors.blue,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Produtora: '),
+                    const Text(
+                      'Produtora: ',
+                      style: TextStyle(fontSize: 16),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: SizedBox(
@@ -102,16 +112,20 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                   height: 30,
                   color: Colors.blue,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Ano de lançamento: '),
+                    const Text(
+                      'Ano de lançamento: ',
+                      style: TextStyle(fontSize: 16),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: SizedBox(
                         height: 20,
                         child: Text(
-                          '${item!.anoDeLancamentoPublicacao}',
+                          DateFormat('yyyy')
+                              .format(item!.anoDeLancamentoPublicacao),
                           style: const TextStyle(fontSize: 18),
                         ),
                       ),
@@ -122,10 +136,13 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                   height: 30,
                   color: Colors.blue,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Genero do filme: '),
+                    const Text(
+                      'Genero do filme: ',
+                      style: TextStyle(fontSize: 16),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: SizedBox(
@@ -145,9 +162,13 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Sinopse: '),
+                    const Text(
+                      'Sinopse: ',
+                      style: TextStyle(fontSize: 16),
+                    ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      padding:
+                          const EdgeInsets.only(top: 10, left: 10, right: 10),
                       child: Center(
                         child: Container(
                           padding: const EdgeInsets.all(10),
@@ -155,7 +176,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                             borderRadius: BorderRadius.circular(4),
                             color: Colors.grey[100],
                           ),
-                          height: 200,
+                          height: 250,
                           width: 350,
                           child: Text(
                             maxLines: null,
