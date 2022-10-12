@@ -1,3 +1,4 @@
+import 'package:app_colecao_pessoal/page/pagina_conteudo_do_filme.dart';
 import 'package:flutter/material.dart';
 import '../profile/models/item.dart';
 import 'package:intl/intl.dart';
@@ -12,7 +13,19 @@ class ItemDaLista extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) {
+              return PaginaConteudoDoFilme(
+                item: item,
+                key: Key(item.id),
+              );
+            },
+          ),
+        );
+      },
       child: Card(
         color: Colors.grey[200],
         shadowColor: Colors.blue,

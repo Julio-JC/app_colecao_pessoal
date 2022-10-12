@@ -40,10 +40,6 @@ class _minhaListaDeFilmesState extends State<minhaListaDeFilmes> {
     Navigator.of(context).pop();
   }
 
-  // abrirAdd(BuildContext constext){
-  //   return AddMovePage(aoSubimeter: adicionarItem);
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,34 +58,40 @@ class _minhaListaDeFilmesState extends State<minhaListaDeFilmes> {
                 child: Center(child: Text('Nome do Filme')),
               ),
             ),
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6),
-                    color: Colors.white),
-                child: ListView.builder(
-                  itemCount: itens.length,
-                  itemBuilder: (context, index) {
-                    return ItemDaLista(
-                      item: itens[index],
-                    );
-                  },
-                ),
+            const Divider(
+              color: Colors.blue,
+            ),
+            Container(
+              height: 400,
+              margin: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6),
+                  color: Colors.grey[100]),
+              child: ListView.builder(
+                itemCount: itens.length,
+                itemBuilder: (context, index) {
+                  return ItemDaLista(
+                    item: itens[index],
+                  );
+                },
               ),
             ),
-            FloatingActionButton(
-              child: const Icon(Icons.add),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return AddMovePage(aoSubimeter: adicionarItem);
-                    },
-                  ),
-                );
-              },
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: FloatingActionButton(
+                backgroundColor: Colors.blue[100],
+                child: const Icon(Icons.add),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return AddMovePage(aoSubimeter: adicionarItem);
+                      },
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),

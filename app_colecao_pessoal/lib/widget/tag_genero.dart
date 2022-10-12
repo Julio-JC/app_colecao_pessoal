@@ -19,14 +19,15 @@ class _TagGeneroState extends State<TagGenero> {
     return Padding(
       padding: const EdgeInsets.all(5),
       child: ChoiceChip(
-        label: Text(widget.genero),
+        label: Text(
+          widget.genero,
+        ),
         selected: selecionado,
         selectedColor: Colors.blue,
         onSelected: (novoSelecionado) {
           setState(() {
             selecionado = novoSelecionado;
           });
-          print(widget.genero);
           widget.aoPessionar!(widget.genero);
         },
       ),
