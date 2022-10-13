@@ -3,8 +3,8 @@ import 'package:app_colecao_pessoal/page/minha_lista_de_livros.dart';
 import 'package:app_colecao_pessoal/page/minha_lista_de_filmes.dart';
 import 'package:flutter/material.dart';
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+class PaginaInicial extends StatelessWidget {
+  const PaginaInicial({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:app_colecao_pessoal/page/pagina_add_filme.dart';
+import 'package:app_colecao_pessoal/profile/repositorio/repositorio_de_filme.dart';
 import 'package:flutter/material.dart';
 import '../profile/models/item.dart';
 import '../widget/item_da_lista.dart';
@@ -12,7 +13,19 @@ class MinhaListaDeFilmes extends StatefulWidget {
 }
 
 class _MinhaListaDeFilmesState extends State<MinhaListaDeFilmes> {
-  final List<Item> itens = [];
+  final RepositorioDeFilmes repositorioDeFilmes = RepositorioDeFilmes();
+  List<Item> itens = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    repositorioDeFilmes.getItemLista().then((value) {
+      setState(() {
+        itens = value;
+      });
+    });
+  }
 
   adicionarItem(
     String filme,
@@ -35,6 +48,7 @@ class _MinhaListaDeFilmesState extends State<MinhaListaDeFilmes> {
     setState(() {
       itens.add(novoItem);
     });
+    repositorioDeFilmes.salvarListaDeItem(itens);
 
     Navigator.of(context).pop();
   }
@@ -71,6 +85,7 @@ class _MinhaListaDeFilmesState extends State<MinhaListaDeFilmes> {
                 itemBuilder: (context, index) {
                   return ItemDaLista(
                     item: itens[index],
+                    removerItem: removerItem,
                   );
                 },
               ),
@@ -96,5 +111,11 @@ class _MinhaListaDeFilmesState extends State<MinhaListaDeFilmes> {
         ),
       ),
     );
+  }
+
+  void removerItem(Item item) {
+    setState(() {
+      itens.remove(item);
+    });
   }
 }

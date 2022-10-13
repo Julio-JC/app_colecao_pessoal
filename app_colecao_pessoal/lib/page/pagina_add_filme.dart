@@ -1,7 +1,7 @@
 import 'package:app_colecao_pessoal/widget/tag_genero.dart';
 import 'package:app_colecao_pessoal/widget/widget_de_classificacao.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+// ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 
 class PaginaAddFilme extends StatefulWidget {
@@ -22,20 +22,20 @@ class PaginaAddFilme extends StatefulWidget {
 }
 
 class _AddMovePageState extends State<PaginaAddFilme> {
-  final TextEditingController tituloController = TextEditingController();
-  final TextEditingController diretorController = TextEditingController();
+  final TextEditingController _tituloController = TextEditingController();
+  final TextEditingController _diretorController = TextEditingController();
   DateTime data = DateTime.now();
-  final TextEditingController produtoraController = TextEditingController();
-  final TextEditingController sinopseController = TextEditingController();
+  final TextEditingController _produtoraController = TextEditingController();
+  final TextEditingController _sinopseController = TextEditingController();
   String? _genero;
   int? _classificacao;
 
   submeterItem() {
-    final tituloDoFilme = tituloController.text;
-    final diretorDoFilme = diretorController.text;
+    final tituloDoFilme = _tituloController.text;
+    final diretorDoFilme = _diretorController.text;
     final dataFilme = data;
-    final produtoraDoFilme = produtoraController.text;
-    final sinopseDoFilme = sinopseController.text;
+    final produtoraDoFilme = _produtoraController.text;
+    final sinopseDoFilme = _sinopseController.text;
     final generoFilme = _genero;
     final estrelas = _classificacao;
 
@@ -76,7 +76,7 @@ class _AddMovePageState extends State<PaginaAddFilme> {
                     padding: const EdgeInsets.only(
                         left: 8, right: 8, top: 20, bottom: 10),
                     child: TextField(
-                      controller: tituloController,
+                      controller: _tituloController,
                       onSubmitted: (_) => submeterItem(),
                       decoration: const InputDecoration(
                         labelText: 'Titulo',
@@ -144,7 +144,7 @@ class _AddMovePageState extends State<PaginaAddFilme> {
                     padding: const EdgeInsets.only(
                         left: 8, right: 8, top: 10, bottom: 10),
                     child: TextField(
-                      controller: diretorController,
+                      controller: _diretorController,
                       onSubmitted: submeterItem(),
                       decoration: const InputDecoration(
                         labelText: 'Diretor',
@@ -156,7 +156,7 @@ class _AddMovePageState extends State<PaginaAddFilme> {
                     padding: const EdgeInsets.only(
                         left: 8, right: 8, top: 10, bottom: 10),
                     child: TextField(
-                      controller: produtoraController,
+                      controller: _produtoraController,
                       onSubmitted: submeterItem(),
                       decoration: const InputDecoration(
                         labelText: 'Produtora',
@@ -171,7 +171,7 @@ class _AddMovePageState extends State<PaginaAddFilme> {
                       constraints: const BoxConstraints(maxHeight: 100),
                       child: TextField(
                         maxLines: null,
-                        controller: sinopseController,
+                        controller: _sinopseController,
                         onSubmitted: submeterItem(),
                         decoration: const InputDecoration(
                           labelText: 'Sinopse',
@@ -215,9 +215,7 @@ class _AddMovePageState extends State<PaginaAddFilme> {
                   const Text('Quantas estrelas você da para este filme'),
                   WidgetDeClassificacao(
                     aoSelecClassificacao: (aoSelecClassificacao) {
-                      setState(() {
-                        _classificacao = aoSelecClassificacao;
-                      });
+                      _classificacao = aoSelecClassificacao;
                     },
                   ),
                   SizedBox(

@@ -1,9 +1,9 @@
 import 'global/const.dart';
-import 'page/my_home_page.dart';
+import 'page/pagina_inicial.dart';
 import 'package:flutter/material.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MeuApp extends StatelessWidget {
+  const MeuApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: kColorScaffold,
         cardColor: kColorCard,
       ),
-      home: const MyHomePage(),
+      home: const PaginaInicial(),
     );
   }
 }
