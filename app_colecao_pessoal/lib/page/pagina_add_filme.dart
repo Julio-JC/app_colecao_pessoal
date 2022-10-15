@@ -1,4 +1,5 @@
 import 'package:app_colecao_pessoal/profile/infraestructure/data.dart';
+import 'package:app_colecao_pessoal/widget/botao_de_texot.dart';
 import 'package:app_colecao_pessoal/widget/tag_genero.dart';
 import 'package:app_colecao_pessoal/widget/widget_de_classificacao.dart';
 import 'package:flutter/material.dart';
@@ -181,21 +182,15 @@ class _AddMovePageState extends State<PaginaAddFilme> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        TextButton(
-                          onPressed: () {
+                        BotaoDeTexto(
+                          tirulo: 'Cancelar',
+                          aoPressionar: () {
                             Navigator.pop(context);
                           },
-                          child: const Text(
-                            'Cancelar',
-                            style: TextStyle(fontSize: 20),
-                          ),
                         ),
-                        TextButton(
-                          onPressed: submeterItem,
-                          child: const Text(
-                            'Adicionar Filme',
-                            style: TextStyle(fontSize: 20),
-                          ),
+                        BotaoDeTexto(
+                          tirulo: 'Adicionar filme',
+                          aoPressionar: submeterItem,
                         ),
                       ],
                     ),
