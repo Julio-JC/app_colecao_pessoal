@@ -1,8 +1,7 @@
+import 'package:app_colecao_pessoal/profile/infraestructure/data.dart';
 import 'package:app_colecao_pessoal/widget/tag_genero.dart';
 import 'package:app_colecao_pessoal/widget/widget_de_classificacao.dart';
 import 'package:flutter/material.dart';
-// ignore: depend_on_referenced_packages
-import 'package:intl/intl.dart';
 
 class PaginaAddFilme extends StatefulWidget {
   const PaginaAddFilme({super.key, required this.aoSubimeter});
@@ -67,14 +66,17 @@ class _AddMovePageState extends State<PaginaAddFilme> {
           ),
         ),
         body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Card(
+          padding: const EdgeInsets.all(16),
+          child: Card(
+            child: Padding(
+              padding: const EdgeInsets.all(10),
               child: Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(
-                        left: 8, right: 8, top: 20, bottom: 10),
+                      top: 20,
+                      bottom: 10,
+                    ),
                     child: TextField(
                       controller: _tituloController,
                       onSubmitted: (_) => submeterItem(),
@@ -85,64 +87,9 @@ class _AddMovePageState extends State<PaginaAddFilme> {
                     ),
                   ),
                   //TODO Subistitir o acesso a data total por ano rolavel
+                  Data(dateTime: data),
                   Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        const Text(
-                          'Ano de lançamento: ',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Container(
-                          height: 50,
-                          width: 50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Center(
-                              child: IconButton(
-                                  onPressed: () async {
-                                    final dataLancamento = await showDatePicker(
-                                      context: context,
-                                      initialDate: DateTime.now(),
-                                      lastDate: DateTime(2100),
-                                      firstDate: DateTime(1900),
-                                    );
-
-                                    if (dataLancamento != null &&
-                                        dataLancamento != data) {
-                                      setState(() {
-                                        data = dataLancamento;
-                                      });
-
-                                      print(dataLancamento);
-                                    }
-                                  },
-                                  icon: const Icon(Icons.date_range_outlined))),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(15),
-                          height: 50,
-                          width: 120,
-                          decoration: BoxDecoration(
-                            color: Colors.blue[50],
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          child: Text(
-                            DateFormat('yyyy').format(data),
-                            style: const TextStyle(fontSize: 18),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 8, right: 8, top: 10, bottom: 10),
+                    padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child: TextField(
                       controller: _diretorController,
                       onSubmitted: submeterItem(),
@@ -153,8 +100,7 @@ class _AddMovePageState extends State<PaginaAddFilme> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(
-                        left: 8, right: 8, top: 10, bottom: 10),
+                    padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child: TextField(
                       controller: _produtoraController,
                       onSubmitted: submeterItem(),
@@ -165,8 +111,7 @@ class _AddMovePageState extends State<PaginaAddFilme> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(
-                        left: 8, right: 8, top: 10, bottom: 10),
+                    padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child: ConstrainedBox(
                       constraints: const BoxConstraints(maxHeight: 100),
                       child: TextField(
@@ -230,6 +175,7 @@ class _AddMovePageState extends State<PaginaAddFilme> {
                   const SizedBox(
                     height: 20,
                   ),
+                  //TODO criar um widget textButton
                   Padding(
                     padding: const EdgeInsets.all(20),
                     child: Row(

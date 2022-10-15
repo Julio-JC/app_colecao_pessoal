@@ -5,16 +5,19 @@ import 'package:flutter/material.dart';
 import '../profile/models/item.dart';
 import '../widget/item_da_lista.dart';
 
-class MinhaListaDeFilmes extends StatefulWidget {
-  const MinhaListaDeFilmes({super.key});
+class PaginaListaDeFilmes extends StatefulWidget {
+  const PaginaListaDeFilmes({super.key});
 
   @override
-  State<MinhaListaDeFilmes> createState() => _MinhaListaDeFilmesState();
+  State<PaginaListaDeFilmes> createState() => _MinhaListaDeFilmesState();
 }
 
-class _MinhaListaDeFilmesState extends State<MinhaListaDeFilmes> {
+class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
   final RepositorioDeFilmes repositorioDeFilmes = RepositorioDeFilmes();
   List<Item> itens = [];
+
+  Item? itemDeletado;
+  int? posicaoItem;
 
   @override
   void initState() {
@@ -75,11 +78,11 @@ class _MinhaListaDeFilmesState extends State<MinhaListaDeFilmes> {
               color: Colors.blue,
             ),
             Container(
+              padding: const EdgeInsets.all(5),
               height: 400,
               margin: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6),
-                  color: Colors.grey[100]),
+                  borderRadius: BorderRadius.circular(6), color: Colors.white),
               child: ListView.builder(
                 itemCount: itens.length,
                 itemBuilder: (context, index) {
@@ -114,8 +117,31 @@ class _MinhaListaDeFilmesState extends State<MinhaListaDeFilmes> {
   }
 
   void removerItem(Item item) {
+    itemDeletado = item;
+    posicaoItem = itens.indexOf(item);
+
     setState(() {
       itens.remove(item);
+      repositorioDeFilmes.salvarListaDeItem(itens);
     });
+
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          'Filme ${item.titulo} foi remosvido',
+        ),
+        action: SnackBarAction(
+          label: 'Desfazer',
+          onPressed: () {
+            setState(() {
+              itens.insert(posicaoItem!, itemDeletado!);
+            });
+            repositorioDeFilmes.salvarListaDeItem(itens);
+          },
+        ),
+        duration: const Duration(seconds: 5),
+      ),
+    );
   }
 }

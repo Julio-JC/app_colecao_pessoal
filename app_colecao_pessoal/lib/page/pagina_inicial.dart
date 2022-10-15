@@ -1,6 +1,6 @@
-import 'package:app_colecao_pessoal/button_home_page.dart';
-import 'package:app_colecao_pessoal/page/minha_lista_de_livros.dart';
-import 'package:app_colecao_pessoal/page/minha_lista_de_filmes.dart';
+import 'package:app_colecao_pessoal/botao_pagina_inicial.dart';
+import 'package:app_colecao_pessoal/page/pagina_lista_de_livros.dart';
+import 'package:app_colecao_pessoal/page/pagina_lista_de_filmes.dart';
 import 'package:flutter/material.dart';
 
 class PaginaInicial extends StatelessWidget {
@@ -8,110 +8,100 @@ class PaginaInicial extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Minha Coleção'),
-      ),
-      drawer: Drawer(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  IconButton(
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text('Minha Coleção'),
+        ),
+        drawer: Drawer(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListTile(
+                  leading: const Icon(Icons.movie),
+                  title: const Text('Filmes'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const PaginaListaDeFilmes();
+                        },
+                      ),
+                    );
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.book),
+                  title: const Text('Livros'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const PaginaListaDeLivros();
+                        },
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+        body: Container(
+          decoration: const BoxDecoration(),
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                BotaoPaginaInicial(
+                  icon: IconButton(
                     onPressed: () {
-                      print('Catalogo de Filmes');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const PaginaListaDeFilmes();
+                          },
+                        ),
+                      );
                     },
                     icon: const Icon(
                       Icons.local_movies,
+                      size: 100,
                     ),
                   ),
-                  const Text('Filmes'),
-                ],
-              ),
-              Row(
-                children: [
-                  IconButton(
+                  image: 'assets/image/filme_botão2.jpg',
+                ),
+                BotaoPaginaInicial(
+                  icon: IconButton(
                     onPressed: () {
-                      print('Catalogo de Livros');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const PaginaListaDeLivros();
+                          },
+                        ),
+                      );
                     },
                     icon: const Icon(
                       Icons.book,
+                      size: 100,
                     ),
                   ),
-                  const Text('Lovros'),
-                ],
-              )
-            ],
+                  image: 'assets/image/livro_botao.jpg',
+                ),
+              ],
+            ),
           ),
         ),
+        extendBody: true,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person, color: Colors.white),
-            label: 'Perfil',
-          )
-        ],
-      ),
-      body: Container(
-        decoration: const BoxDecoration(),
-        child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ButtonHomePage(
-                icon: IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return const MinhaListaDeFilmes();
-                        },
-                      ),
-                    );
-                    print('Catalogo de filmes');
-                  },
-                  icon: const Icon(
-                    Icons.local_movies,
-                    size: 100,
-                  ),
-                ),
-                image: 'assets/image/filme_botão2.jpg',
-              ),
-              ButtonHomePage(
-                icon: IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return const MinhaListaDeLivros();
-                        },
-                      ),
-                    );
-                    print('Catalogo de livro');
-                  },
-                  icon: const Icon(
-                    Icons.book,
-                    size: 100,
-                  ),
-                ),
-                image: 'assets/image/livro_botao.jpg',
-              ),
-            ],
-          ),
-        ),
-      ),
-      extendBody: true,
     );
   }
 }

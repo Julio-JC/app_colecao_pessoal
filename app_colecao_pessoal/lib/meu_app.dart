@@ -1,5 +1,5 @@
+import 'package:app_colecao_pessoal/page/pagina_navegacao.dart';
 import 'global/const.dart';
-import 'page/pagina_inicial.dart';
 import 'package:flutter/material.dart';
 
 class MeuApp extends StatelessWidget {
@@ -20,7 +20,7 @@ class MeuApp extends StatelessWidget {
         scaffoldBackgroundColor: kColorScaffold,
         cardColor: kColorCard,
       ),
-      home: const PaginaInicial(),
+      home: const PaginaNavegacao(),
     );
   }
 }

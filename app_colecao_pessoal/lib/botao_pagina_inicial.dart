@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ButtonHomePage extends StatelessWidget {
-  const ButtonHomePage({
+class BotaoPaginaInicial extends StatelessWidget {
+  const BotaoPaginaInicial({
     super.key,
     required this.icon,
     required this.image,

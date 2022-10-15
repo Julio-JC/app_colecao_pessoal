@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class Item {
   Item({
     required this.id,
@@ -44,29 +42,4 @@ class Item {
         sinopse = json['sinopse'],
         generoDoItem = json['generoDoItem'],
         notaDoUsuario = json['notaDoUsuario'];
-
-  // Map<String, dynamic> toMap() {
-  //   var map = <String, dynamic>{
-  //     'id': id,
-  //     'titulo': titulo,
-  //     'autorDiretor': autorDiretor,
-  //     'anoDeLancamentoPublicacao': anoDeLancamentoPublicacao,
-  //     'produtoraEditora': produtoraEditora,
-  //     'sinopse': sinopse,
-  //     'generoDoItem': generoDoItem,
-  //     'notaDoUsuario': notaDoUsuario,
-  //   };
-  //   return map;
-  // }
-
-  // Item.fromMap(Map<String, dynamic> map) {
-  //   id = map['id'];
-  //   titulo = map['titulo'];
-  //   autorDiretor = map['autorDiretor'];
-  //   anoDeLancamentoPublicacao = map['anoDeLancamentoPublicacao'];
-  //   produtoraEditora = map['produtoraEditora'];
-  //   sinopse = map['sinopse'];
-  //   generoDoItem = map['generoDoItem'];
-  //   notaDoUsuario = map['notaDoUsuario'];
-  // }
 }
