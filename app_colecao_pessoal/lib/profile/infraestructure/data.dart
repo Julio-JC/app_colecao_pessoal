@@ -4,8 +4,8 @@ import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class Data extends StatefulWidget {
-  Data({super.key, required this.dateTime});
-
+  Data({super.key, required this.titulo, required this.dateTime});
+  final String titulo;
   late DateTime dateTime;
 
   @override
@@ -20,9 +20,9 @@ class _DataState extends State<Data> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          const Text(
-            'Lançamento em: ',
-            style: TextStyle(
+          Text(
+            widget.titulo,
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
             ),
@@ -36,16 +36,15 @@ class _DataState extends State<Data> {
             child: Center(
               child: IconButton(
                 onPressed: () async {
-                  final dataLancamento = await showDatePicker(
+                  final data = await showDatePicker(
                     context: context,
                     initialDate: DateTime.now(),
                     lastDate: DateTime(2100),
                     firstDate: DateTime(1900),
                   );
-                  if (dataLancamento != null &&
-                      dataLancamento != widget.dateTime) {
+                  if (data != null && data != widget.dateTime) {
                     setState(() {
-                      widget.dateTime = dataLancamento;
+                      widget.dateTime = data;
                     });
                   }
                 },

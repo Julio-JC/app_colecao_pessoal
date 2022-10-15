@@ -5,7 +5,7 @@ import 'package:app_colecao_pessoal/widget/widget_de_classificacao.dart';
 import 'package:flutter/material.dart';
 
 class PaginaAddFilme extends StatefulWidget {
-  const PaginaAddFilme({super.key, required this.aoSubimeter});
+  const PaginaAddFilme({super.key, this.aoSubimeter});
 
   final Function(
     String,
@@ -15,7 +15,7 @@ class PaginaAddFilme extends StatefulWidget {
     String,
     String,
     int,
-  ) aoSubimeter;
+  )? aoSubimeter;
 
   @override
   State<PaginaAddFilme> createState() => _AddMovePageState();
@@ -24,7 +24,7 @@ class PaginaAddFilme extends StatefulWidget {
 class _AddMovePageState extends State<PaginaAddFilme> {
   final TextEditingController _tituloController = TextEditingController();
   final TextEditingController _diretorController = TextEditingController();
-  DateTime data = DateTime.now();
+  final DateTime _data = DateTime.now();
   final TextEditingController _produtoraController = TextEditingController();
   final TextEditingController _sinopseController = TextEditingController();
   String? _genero;
@@ -33,7 +33,7 @@ class _AddMovePageState extends State<PaginaAddFilme> {
   submeterItem() {
     final tituloDoFilme = _tituloController.text;
     final diretorDoFilme = _diretorController.text;
-    final dataFilme = data;
+    final dataFilme = _data;
     final produtoraDoFilme = _produtoraController.text;
     final sinopseDoFilme = _sinopseController.text;
     final generoFilme = _genero;
@@ -45,7 +45,7 @@ class _AddMovePageState extends State<PaginaAddFilme> {
       return;
     }
 
-    widget.aoSubimeter(
+    widget.aoSubimeter!(
       tituloDoFilme,
       diretorDoFilme,
       dataFilme,
@@ -88,7 +88,7 @@ class _AddMovePageState extends State<PaginaAddFilme> {
                     ),
                   ),
                   //TODO Subistitir o acesso a data total por ano rolavel
-                  Data(dateTime: data),
+                  Data(titulo: 'Lançançando em:', dateTime: _data),
                   Padding(
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child: TextField(
