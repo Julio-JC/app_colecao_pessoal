@@ -1,13 +1,14 @@
 import 'dart:math';
 import 'package:app_colecao_pessoal/page/pagina_add_filme.dart';
 import 'package:app_colecao_pessoal/profile/repositorio/repositorio_de_filme.dart';
+import 'package:app_colecao_pessoal/widget/card_do_carrossel.dart';
 import 'package:flutter/material.dart';
 import '../profile/models/item.dart';
 import '../widget/item_da_lista.dart';
 
 class PaginaListaDeFilmes extends StatefulWidget {
-  const PaginaListaDeFilmes({super.key});
-
+  PaginaListaDeFilmes({super.key, this.item});
+  Item? item;
   @override
   State<PaginaListaDeFilmes> createState() => _MinhaListaDeFilmesState();
 }
@@ -40,14 +41,15 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
     int nota,
   ) {
     final novoItem = Item(
-        id: Random().nextDouble().toString(),
-        titulo: filme,
-        autorDiretor: diretor,
-        anoDeLancamentoPublicacao: anoLancamento,
-        produtoraEditora: produtora,
-        sinopse: sinopse,
-        generoDoItem: genero,
-        notaDoUsuario: nota);
+      id: Random().nextDouble().toString(),
+      titulo: filme,
+      autorDiretor: diretor,
+      anoDeLancamentoPublicacao: anoLancamento,
+      produtoraEditora: produtora,
+      sinopse: sinopse,
+      generoDoItem: genero,
+      notaDoUsuario: nota,
+    );
     setState(() {
       itens.add(novoItem);
     });
@@ -67,11 +69,21 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
-            const Expanded(
+            Expanded(
               child: SizedBox(
-                height: 80,
-                width: 200,
-                child: Center(child: Text('Nome do Filme')),
+                height: 90,
+                width: 600,
+                child: Center(
+                  // Adicionar os titulos dos 3 melhores filmes no carrossel
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: const [
+                      CardDoCarrossel(texto: 'Filme 1'),
+                      CardDoCarrossel(texto: 'Filme 2'),
+                      CardDoCarrossel(texto: 'filme 3'),
+                    ],
+                  ),
+                ),
               ),
             ),
             const Divider(
@@ -94,20 +106,32 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(10),
-              child: FloatingActionButton(
-                backgroundColor: Colors.blue[100],
-                child: const Icon(Icons.add),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return PaginaAddFilme(aoSubimeter: adicionarItem);
-                      },
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Sua lista possui ${itens.length} filmes',
+                    style: const TextStyle(
+                      fontSize: 17,
+                      color: Colors.white,
                     ),
-                  );
-                },
+                  ),
+                  FloatingActionButton(
+                    backgroundColor: Colors.blue[100],
+                    child: const Icon(Icons.add),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return PaginaAddFilme(aoSubimeter: adicionarItem);
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
           ],
