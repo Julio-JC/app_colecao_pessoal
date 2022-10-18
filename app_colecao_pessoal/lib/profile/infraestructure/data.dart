@@ -55,7 +55,7 @@ class _DataState extends State<Data> {
           Container(
             padding: const EdgeInsets.all(15),
             height: 50,
-            width: 120,
+            width: 135,
             decoration: BoxDecoration(
               color: Colors.blue[50],
               borderRadius: BorderRadius.circular(25),

@@ -1,4 +1,5 @@
 import 'package:app_colecao_pessoal/page/pagina_add_usuario.dart';
+import 'package:app_colecao_pessoal/page/pagina_do_usuario.dart';
 import 'package:app_colecao_pessoal/page/pagina_inicial.dart';
 import 'package:flutter/material.dart';
 
@@ -12,10 +13,7 @@ class PaginaNavegacao extends StatefulWidget {
 }
 
 class _PaginaNavegacaoState extends State<PaginaNavegacao> {
-  final List<Widget> pagina = [
-    const PaginaInicial(),
-    const PaginaAddUsuario(),
-  ];
+  final List<Widget> pagina = [PaginaInicial(), const PaginaAddUsuario()];
   int selecaoIdex = 0;
   @override
   Widget build(BuildContext context) {

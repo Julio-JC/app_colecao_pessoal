@@ -2,7 +2,7 @@ class Usuario {
   Usuario({
     required this.nome,
     required this.dataNascimento,
-    required this.fotoPerfil,
+    required this.avatarUrl,
     required this.generoFilmeFavorito,
     required this.generoLivroFavorito,
     required this.diretorFavorito,
@@ -10,8 +10,8 @@ class Usuario {
   });
 
   String nome;
-  int dataNascimento;
-  String fotoPerfil;
+  DateTime dataNascimento;
+  String avatarUrl;
   String generoFilmeFavorito;
   String generoLivroFavorito;
   String diretorFavorito;

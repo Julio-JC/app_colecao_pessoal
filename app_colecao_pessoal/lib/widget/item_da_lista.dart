@@ -91,12 +91,16 @@ class ItemDaLista extends StatelessWidget {
                           selected: true,
                           selectedColor: Colors.blue[100],
                         ),
-                        const SizedBox(width: 80),
+                        const SizedBox(width: 50),
                         const Icon(
                           Icons.star,
                           color: Colors.blue,
                         ),
-                        Text('Classificação ${item.notaDoUsuario} estrelas'),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10),
+                          child: Text(
+                              'Classificação ${item.notaDoUsuario} estrelas'),
+                        ),
                       ],
                     ),
                   ),

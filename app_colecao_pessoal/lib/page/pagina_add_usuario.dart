@@ -3,9 +3,13 @@ import 'package:app_colecao_pessoal/profile/infraestructure/data.dart';
 import 'package:app_colecao_pessoal/widget/botao_de_texot.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../profile/models/usuario.dart';
 
 class PaginaAddUsuario extends StatefulWidget {
-  const PaginaAddUsuario({super.key, this.aoPressionar});
+  const PaginaAddUsuario({
+    super.key,
+    this.aoPressionar,
+  });
 
   final Function(
     String,
@@ -23,39 +27,79 @@ class PaginaAddUsuario extends StatefulWidget {
 
 class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
   final TextEditingController _nomeController = TextEditingController();
-  DateTime _dataNasc = DateTime.now();
-  String? _imagem;
+  final DateTime _dataNasc = DateTime.now();
+  late String _avatarUsuario = 'assets/image/icone-do-perfil.jpg';
   final TextEditingController _generoFilmeController = TextEditingController();
   final TextEditingController _generoLivroController = TextEditingController();
   final TextEditingController _diretorFavController = TextEditingController();
   final TextEditingController _autorFavController = TextEditingController();
 
-  adcionarUsuario() {
-    final nomeUsuario = _nomeController.text;
-    final nascimento = _dataNasc;
-    final imagemUsuario = _imagem;
-    final genedoFilmeFav = _generoFilmeController.text;
-    final generLivroFav = _generoLivroController.text;
-    final diretorFav = _diretorFavController.text;
-    final autorFav = _autorFavController.text;
+  // addUsuario() {
+  //   widget.usuario!.nome = _nomeController.text;
+  //   widget.usuario!.dataNascimento = _dataNasc;
+  //   widget.usuario!.avatarUrl = _avatarUsuario;
+  //   widget.usuario!.generoFilmeFavorito = _generoFilmeController.text;
+  //   widget.usuario!.generoLivroFavorito = _generoLivroController.text;
+  //   widget.usuario!.diretorFavorito = _diretorFavController.text;
+  //   widget.usuario!.autoFavorito = _autorFavController.text;
 
-    if (nomeUsuario.isEmpty || imagemUsuario!.isEmpty) {
-      return;
-    }
+  //   if (widget.usuario!.nome.isEmpty) {
+  //     return;
+  //   }
 
-    widget.aoPressionar!(
-      nomeUsuario,
-      nascimento,
-      imagemUsuario,
-      genedoFilmeFav,
-      generLivroFav,
-      diretorFav,
-      autorFav,
-    );
-  }
+  //   widget.aoPressionar!(
+  //     widget.usuario!.nome,
+  //     widget.usuario!.dataNascimento,
+  //     widget.usuario!.avatarUrl,
+  //     widget.usuario!.generoFilmeFavorito,
+  //     widget.usuario!.generoLivroFavorito,
+  //     widget.usuario!.diretorFavorito,
+  //     widget.usuario!.autoFavorito,
+  //   );
+  // }
+
+  // addcionarUsuario() {
+  //   final nomeUsuario = _nomeController.text;
+  //   final nascimento = _dataNasc;
+  //   final avatar = _avatarUsuario;
+  //   final genedoFilmeFav = _generoFilmeController.text;
+  //   final generLivroFav = _generoLivroController.text;
+  //   final diretorFav = _diretorFavController.text;
+  //   final autorFav = _autorFavController.text;
+
+  //   if (nomeUsuario.isEmpty) {
+  //     return;
+  //   }
+
+  //   widget.aoPressionar!(
+  //     nomeUsuario,
+  //     nascimento,
+  //     avatar,
+  //     genedoFilmeFav,
+  //     generLivroFav,
+  //     diretorFav,
+  //     autorFav,
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
+    void _addUsuario() {
+      Navigator.pushReplacementNamed(
+        context,
+        '/PaginaDoUsuario',
+        arguments: {
+          'nome': _nomeController.value.text,
+          'data': _dataNasc,
+          'avatar': _avatarUsuario,
+          'generoFilme': _generoFilmeController.value.text,
+          'generoLivro': _generoLivroController.value.text,
+          'doretor': _diretorFavController.value.text,
+          'autor': _autorFavController.value.text,
+        },
+      );
+    }
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -76,12 +120,12 @@ class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
                     child: Container(
                       height: 150,
                       width: 150,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.amber,
                         image: DecorationImage(
-                            image:
-                                AssetImage('assets/image/icone-do-perfil.jpg')),
+                          image: NetworkImage(_avatarUsuario),
+                        ),
                       ),
                     ),
                   ),
@@ -95,56 +139,7 @@ class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
                       ),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      const Text(
-                        'Data de nascimento',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: Center(
-                          child: IconButton(
-                            onPressed: () async {
-                              final data = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                lastDate: DateTime(2100),
-                                firstDate: DateTime(1900),
-                              );
-                              if (_dataNasc != null && data != _dataNasc) {
-                                setState(() {
-                                  _dataNasc = data!;
-                                });
-                              }
-                            },
-                            icon: const Icon(Icons.date_range_outlined),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(15),
-                        height: 50,
-                        width: 120,
-                        decoration: BoxDecoration(
-                          color: Colors.blue[50],
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: Text(
-                          DateFormat('d/MM/yyyy').format(_dataNasc),
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                      )
-                    ],
-                  ),
+                  Data(titulo: 'Data de Nascimento', dateTime: _dataNasc),
                   Padding(
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child: TextField(
@@ -199,7 +194,9 @@ class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
                       ),
                       BotaoDeTexto(
                         tirulo: 'Adicionar usuário',
-                        aoPressionar: () {},
+                        aoPressionar: () {
+                          return _addUsuario();
+                        },
                       ),
                     ],
                   ),

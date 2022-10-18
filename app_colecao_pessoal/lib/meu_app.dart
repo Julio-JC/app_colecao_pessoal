@@ -1,5 +1,5 @@
 import 'package:app_colecao_pessoal/page/pagina_add_filme.dart';
-import 'package:app_colecao_pessoal/page/pagina_add_usuario.dart';
+import 'package:app_colecao_pessoal/page/pagina_do_usuario.dart';
 import 'package:app_colecao_pessoal/page/pagina_conteudo_do_filme.dart';
 import 'package:app_colecao_pessoal/page/pagina_inicial.dart';
 import 'package:app_colecao_pessoal/page/pagina_lista_de_filmes.dart';
@@ -29,11 +29,11 @@ class MeuApp extends StatelessWidget {
       home: const PaginaNavegacao(),
       routes: {
         '/PaginaNavegacao': (context) => const PaginaNavegacao(),
-        '/PaginaInicial': (context) => const PaginaInicial(),
+        '/PaginaInicial': (context) => PaginaInicial(),
         '/PaginaAddFilme': (context) => const PaginaAddFilme(),
-        '/PaginaAddUsuario': (context) => const PaginaAddUsuario(),
-        '/PaginaListaDeFilmes': (context) => const PaginaListaDeFilmes(),
-        '/PaginaListaDeLivros': (context) => const PaginaListaDeLivros(),
+        '/PaginaAddUsuario': (context) => PaginaDoUsuario(),
+        '/PaginaListaDeFilmes': (context) => PaginaListaDeFilmes(),
+        '/PaginaListaDeLivros': (context) => PaginaListaDeLivros(),
         '/PaginaConteudoDoFilme': (context) => PaginaConteudoDoFilme(),
       },
     );

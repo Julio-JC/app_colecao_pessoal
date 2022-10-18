@@ -1,11 +1,23 @@
+import 'package:app_colecao_pessoal/profile/models/usuario.dart';
 import 'package:app_colecao_pessoal/widget/botao_pagina_inicial.dart';
 import 'package:app_colecao_pessoal/page/pagina_lista_de_livros.dart';
 import 'package:app_colecao_pessoal/page/pagina_lista_de_filmes.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class PaginaInicial extends StatelessWidget {
-  const PaginaInicial({super.key});
+class PaginaInicial extends StatefulWidget {
+  PaginaInicial({
+    super.key,
+    this.usuario,
+  });
 
+  late Usuario? usuario;
+
+  @override
+  State<PaginaInicial> createState() => _PaginaInicialState();
+}
+
+class _PaginaInicialState extends State<PaginaInicial> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -21,7 +33,7 @@ class PaginaInicial extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.30,
+                  height: MediaQuery.of(context).size.height * 0.38,
                   width: double.infinity,
                   child: Column(
                     children: [
@@ -47,7 +59,7 @@ class PaginaInicial extends StatelessWidget {
                             SizedBox(
                               width: 40,
                             ),
-                            Text('Nome do Usuário'),
+                            Text('Julo'),
                           ],
                         ),
                       ),
@@ -60,7 +72,11 @@ class PaginaInicial extends StatelessWidget {
                             SizedBox(
                               width: 40,
                             ),
-                            Text('08/10/1983'),
+                            Text('08/10/1983'
+                                // DateFormat('dd/MM/yyyy')
+                                //     .format(widget.usuario!.dataNascimento),
+                                // style: const TextStyle(fontSize: 18),
+                                ),
                           ],
                         ),
                       ),
@@ -69,11 +85,24 @@ class PaginaInicial extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: const [
-                            Text('Genero favorito: '),
+                            Text('Genero filme favorito: '),
                             SizedBox(
                               width: 40,
                             ),
                             Text('Ação'),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            Text('Genero livro favorito: '),
+                            SizedBox(
+                              width: 40,
+                            ),
+                            Text('Histórico'),
                           ],
                         ),
                       ),
@@ -87,6 +116,19 @@ class PaginaInicial extends StatelessWidget {
                               width: 40,
                             ),
                             Text('Spilberg'),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            Text('Autor favorito: '),
+                            SizedBox(
+                              width: 40,
+                            ),
+                            Text('Caio'),
                           ],
                         ),
                       ),
@@ -104,12 +146,13 @@ class PaginaInicial extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const PaginaListaDeFilmes();
+                          return PaginaListaDeFilmes();
                         },
                       ),
                     );
                   },
                 ),
+                //Adicionar aqui informação da quantidade da lista de filmes
                 ListTile(
                   leading: const Icon(Icons.book),
                   title: const Text('Livros'),
@@ -118,12 +161,13 @@ class PaginaInicial extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const PaginaListaDeLivros();
+                          return PaginaListaDeLivros();
                         },
                       ),
                     );
                   },
                 ),
+                //Adicionar aqui informação da quantidade da lista de livros
               ],
             ),
           ),
@@ -141,7 +185,7 @@ class PaginaInicial extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return const PaginaListaDeFilmes();
+                            return PaginaListaDeFilmes();
                           },
                         ),
                       );
@@ -160,7 +204,7 @@ class PaginaInicial extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return const PaginaListaDeLivros();
+                            return PaginaListaDeLivros();
                           },
                         ),
                       );
