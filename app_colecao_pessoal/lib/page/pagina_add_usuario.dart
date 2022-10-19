@@ -1,9 +1,6 @@
-import 'package:app_colecao_pessoal/page/pagina_inicial.dart';
 import 'package:app_colecao_pessoal/profile/infraestructure/data.dart';
 import 'package:app_colecao_pessoal/widget/botao_de_texot.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import '../profile/models/usuario.dart';
 
 class PaginaAddUsuario extends StatefulWidget {
   const PaginaAddUsuario({
@@ -28,83 +25,45 @@ class PaginaAddUsuario extends StatefulWidget {
 class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
   final TextEditingController _nomeController = TextEditingController();
   final DateTime _dataNasc = DateTime.now();
-  late String _avatarUsuario = 'assets/image/icone-do-perfil.jpg';
+  final TextEditingController _avatarController = TextEditingController();
   final TextEditingController _generoFilmeController = TextEditingController();
   final TextEditingController _generoLivroController = TextEditingController();
   final TextEditingController _diretorFavController = TextEditingController();
   final TextEditingController _autorFavController = TextEditingController();
 
-  // addUsuario() {
-  //   widget.usuario!.nome = _nomeController.text;
-  //   widget.usuario!.dataNascimento = _dataNasc;
-  //   widget.usuario!.avatarUrl = _avatarUsuario;
-  //   widget.usuario!.generoFilmeFavorito = _generoFilmeController.text;
-  //   widget.usuario!.generoLivroFavorito = _generoLivroController.text;
-  //   widget.usuario!.diretorFavorito = _diretorFavController.text;
-  //   widget.usuario!.autoFavorito = _autorFavController.text;
+  adicionarUsuario() {
+    final nomeUsuario = _nomeController.text;
+    final nascimento = _dataNasc;
+    final avatar = _avatarController.text;
+    final generodoFilmeFav = _generoFilmeController.text;
+    final generoDoLivroFav = _generoLivroController.text;
+    final diretorFav = _diretorFavController.text;
+    final autorFav = _autorFavController.text;
 
-  //   if (widget.usuario!.nome.isEmpty) {
-  //     return;
-  //   }
+    if (nomeUsuario.isEmpty) {
+      return;
+    }
 
-  //   widget.aoPressionar!(
-  //     widget.usuario!.nome,
-  //     widget.usuario!.dataNascimento,
-  //     widget.usuario!.avatarUrl,
-  //     widget.usuario!.generoFilmeFavorito,
-  //     widget.usuario!.generoLivroFavorito,
-  //     widget.usuario!.diretorFavorito,
-  //     widget.usuario!.autoFavorito,
-  //   );
-  // }
-
-  // addcionarUsuario() {
-  //   final nomeUsuario = _nomeController.text;
-  //   final nascimento = _dataNasc;
-  //   final avatar = _avatarUsuario;
-  //   final genedoFilmeFav = _generoFilmeController.text;
-  //   final generLivroFav = _generoLivroController.text;
-  //   final diretorFav = _diretorFavController.text;
-  //   final autorFav = _autorFavController.text;
-
-  //   if (nomeUsuario.isEmpty) {
-  //     return;
-  //   }
-
-  //   widget.aoPressionar!(
-  //     nomeUsuario,
-  //     nascimento,
-  //     avatar,
-  //     genedoFilmeFav,
-  //     generLivroFav,
-  //     diretorFav,
-  //     autorFav,
-  //   );
-  // }
+    if (widget.aoPressionar != null) {
+      widget.aoPressionar!(
+        nomeUsuario,
+        nascimento,
+        avatar,
+        generodoFilmeFav,
+        generoDoLivroFav,
+        diretorFav,
+        autorFav,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    void _addUsuario() {
-      Navigator.pushReplacementNamed(
-        context,
-        '/PaginaDoUsuario',
-        arguments: {
-          'nome': _nomeController.value.text,
-          'data': _dataNasc,
-          'avatar': _avatarUsuario,
-          'generoFilme': _generoFilmeController.value.text,
-          'generoLivro': _generoLivroController.value.text,
-          'doretor': _diretorFavController.value.text,
-          'autor': _autorFavController.value.text,
-        },
-      );
-    }
-
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text('Pagina do Usuário'),
+          title: const Text('Adicionar do Usuário'),
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
@@ -113,19 +72,14 @@ class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
               padding: const EdgeInsets.all(10),
               child: Column(
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      print('Editar Imagem');
-                    },
-                    child: Container(
-                      height: 150,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.amber,
-                        image: DecorationImage(
-                          image: NetworkImage(_avatarUsuario),
-                        ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10, top: 20),
+                    child: TextField(
+                      controller: _avatarController,
+                      //onChanged: (_) => adicionarUsuario(),
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Url da Imagem',
                       ),
                     ),
                   ),
@@ -133,6 +87,7 @@ class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
                     padding: const EdgeInsets.only(bottom: 10),
                     child: TextField(
                       controller: _nomeController,
+                      //onChanged: (_) => adicionarUsuario(),
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Nome',
@@ -144,6 +99,7 @@ class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child: TextField(
                       controller: _generoFilmeController,
+                      //onChanged: (_) => adicionarUsuario(),
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Genero filme favorito',
@@ -154,6 +110,7 @@ class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child: TextField(
                       controller: _generoLivroController,
+                      //onChanged: (_) => adicionarUsuario(),
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Genero Livro favorito',
@@ -164,6 +121,7 @@ class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child: TextField(
                       controller: _diretorFavController,
+                      //onChanged: (_) => adicionarUsuario(),
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Diretor favorito',
@@ -174,6 +132,7 @@ class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child: TextField(
                       controller: _autorFavController,
+                      //onChanged: (_) => adicionarUsuario(),
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Autor favorito',
@@ -194,9 +153,7 @@ class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
                       ),
                       BotaoDeTexto(
                         tirulo: 'Adicionar usuário',
-                        aoPressionar: () {
-                          return _addUsuario();
-                        },
+                        aoPressionar: adicionarUsuario,
                       ),
                     ],
                   ),

@@ -18,10 +18,10 @@ class PaginaAddFilme extends StatefulWidget {
   )? aoSubimeter;
 
   @override
-  State<PaginaAddFilme> createState() => _AddMovePageState();
+  State<PaginaAddFilme> createState() => _PaginaAddFilmeState();
 }
 
-class _AddMovePageState extends State<PaginaAddFilme> {
+class _PaginaAddFilmeState extends State<PaginaAddFilme> {
   final TextEditingController _tituloController = TextEditingController();
   final TextEditingController _diretorController = TextEditingController();
   final DateTime _data = DateTime.now();

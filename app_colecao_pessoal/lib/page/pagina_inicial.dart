@@ -1,9 +1,9 @@
+import 'package:app_colecao_pessoal/global/tema_controle.dart';
 import 'package:app_colecao_pessoal/profile/models/usuario.dart';
 import 'package:app_colecao_pessoal/widget/botao_pagina_inicial.dart';
 import 'package:app_colecao_pessoal/page/pagina_lista_de_livros.dart';
 import 'package:app_colecao_pessoal/page/pagina_lista_de_filmes.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class PaginaInicial extends StatefulWidget {
   PaginaInicial({
@@ -11,7 +11,7 @@ class PaginaInicial extends StatefulWidget {
     this.usuario,
   });
 
-  late Usuario? usuario;
+  Usuario? usuario;
 
   @override
   State<PaginaInicial> createState() => _PaginaInicialState();
@@ -161,13 +161,21 @@ class _PaginaInicialState extends State<PaginaInicial> {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return PaginaListaDeLivros();
+                          return const PaginaListaDeLivros();
                         },
                       ),
                     );
                   },
                 ),
                 //Adicionar aqui informação da quantidade da lista de livros
+                Padding(
+                  padding: const EdgeInsets.only(left: 8),
+                  child: Switch(
+                      value: TemaController.instancia.temas,
+                      onChanged: (value) {
+                        TemaController.instancia.mudancaTema();
+                      }),
+                )
               ],
             ),
           ),
@@ -204,7 +212,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return PaginaListaDeLivros();
+                            return const PaginaListaDeLivros();
                           },
                         ),
                       );
