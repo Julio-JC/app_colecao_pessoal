@@ -1,3 +1,4 @@
+import 'package:app_colecao_pessoal/global/const.dart';
 import 'package:app_colecao_pessoal/profile/models/usuario.dart';
 import 'package:app_colecao_pessoal/widget/botao_pagina_inicial.dart';
 import 'package:app_colecao_pessoal/page/pagina_lista_de_livros.dart';
@@ -26,24 +27,16 @@ class _PaginaInicialState extends State<PaginaInicial> {
         appBar: AppBar(
           centerTitle: true,
           title: const Text('Minha Coleção'),
-          actions: [
-            Switch(
-              value: AppController.instance.isDark,
-              onChanged: (value) {
-                AppController.instance.changeTheme();
-              },
-            ),
-          ],
         ),
         drawer: Drawer(
-          // Adicionar no Drawer os dados do usuário
+          // Adicionar no Drawer os dados do usuário para uma visualizaçao rapida
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.38,
+                  height: MediaQuery.of(context).size.height * 0.40,
                   width: double.infinity,
                   child: Column(
                     children: [
@@ -142,7 +135,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
                   ),
                 ),
                 const Divider(
-                  color: Colors.blue,
+                  color: kCorDivider,
                 ),
                 ListTile(
                   leading: const Icon(Icons.movie),

@@ -1,6 +1,5 @@
 import 'package:app_colecao_pessoal/page/pagina_add_usuario.dart';
 import 'package:app_colecao_pessoal/page/pagina_inicial.dart';
-import 'package:app_colecao_pessoal/page/pagina_novo_usuario.dart';
 import 'package:flutter/material.dart';
 
 class PaginaNavegacao extends StatefulWidget {

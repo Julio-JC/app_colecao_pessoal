@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../global/const.dart';
 import '../profile/models/filme.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
@@ -37,7 +38,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                           filme!.notaDoUsuario,
                           (index) => const Icon(
                             Icons.star,
-                            color: Colors.amber,
+                            color: kColorEstrela,
                           ),
                         ),
                       ),
@@ -67,7 +68,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                   ),
                   const Divider(
                     height: 30,
-                    color: Colors.blue,
+                    color: kCorDivider,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -90,7 +91,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                   ),
                   const Divider(
                     height: 30,
-                    color: Colors.blue,
+                    color: kCorDivider,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -113,7 +114,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                   ),
                   const Divider(
                     height: 30,
-                    color: Colors.blue,
+                    color: kCorDivider,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -136,7 +137,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                   ),
                   const Divider(
                     height: 30,
-                    color: Colors.blue,
+                    color: kCorDivider,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -159,7 +160,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                   ),
                   const Divider(
                     height: 30,
-                    color: Colors.blue,
+                    color: kCorDivider,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -198,7 +199,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                               icon: const Icon(
                                 Icons.edit,
                                 size: 30,
-                                color: Colors.blue,
+                                color: kCorDivider,
                               ),
                             ),
                           ],

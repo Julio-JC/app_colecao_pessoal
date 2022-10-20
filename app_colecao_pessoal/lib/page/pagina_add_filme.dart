@@ -1,11 +1,11 @@
-import 'package:app_colecao_pessoal/profile/infraestructure/data.dart';
+import 'package:app_colecao_pessoal/widget/data.dart';
 import 'package:app_colecao_pessoal/widget/botao_de_texot.dart';
 import 'package:app_colecao_pessoal/widget/tag_genero.dart';
 import 'package:app_colecao_pessoal/widget/widget_de_classificacao.dart';
 import 'package:flutter/material.dart';
 
 class PaginaAddFilme extends StatefulWidget {
-  const PaginaAddFilme({super.key, this.aoSubimeter});
+  const PaginaAddFilme({super.key, this.aoSubimeter, this.editar});
 
   final Function(
     String,
@@ -16,6 +16,7 @@ class PaginaAddFilme extends StatefulWidget {
     String,
     int,
   )? aoSubimeter;
+  final Function(List)? editar;
 
   @override
   State<PaginaAddFilme> createState() => _PaginaAddFilmeState();
@@ -87,7 +88,6 @@ class _PaginaAddFilmeState extends State<PaginaAddFilme> {
                       ),
                     ),
                   ),
-                  //TODO Subistitir o acesso a data total por ano rolavel
                   Data(titulo: 'Lançançando em:', dateTime: _data),
                   Padding(
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
@@ -126,7 +126,6 @@ class _PaginaAddFilmeState extends State<PaginaAddFilme> {
                       ),
                     ),
                   ),
-
                   Padding(
                     padding: const EdgeInsets.only(left: 10, right: 10),
                     child: Row(
@@ -176,7 +175,6 @@ class _PaginaAddFilmeState extends State<PaginaAddFilme> {
                   const SizedBox(
                     height: 20,
                   ),
-                  //TODO criar um widget textButton
                   Padding(
                     padding: const EdgeInsets.all(20),
                     child: Row(

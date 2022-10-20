@@ -16,6 +16,7 @@ class PaginaListaDeFilmes extends StatefulWidget {
 class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
   final Repositorio repositorioDeFilmes = Repositorio();
   List<Filme> filmes = [];
+  List<Filme> pontuacao = [];
 
   Filme? itemDeletado;
   int? posicaoItem;
@@ -58,19 +59,6 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
     Navigator.of(context).pop();
   }
 
-  //Criar a lógica para adicionar no carrigo de TopFilmes
-
-  // melhoresFilmes(context, index) {
-  //   repositorioDeFilmes.getItemLista().then((value) {
-  //     final topFilmes = itens[index].titulo.isEmpty ||
-  //             itens[index].titulo.isEmpty == itens[index].titulo.isEmpty &&
-  //                 itens[7].notaDoUsuario <= 2
-  //         ? 'Filme'
-  //         : itens[1].titulo;
-  //     return topFilmes;
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -78,6 +66,20 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
         appBar: AppBar(
           centerTitle: true,
           title: const Text('Meus Filmes'),
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.blue[100],
+          child: const Icon(Icons.add),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return PaginaAddFilme(aoSubimeter: adicionarItem);
+                },
+              ),
+            );
+          },
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -97,19 +99,15 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
                     width: 400,
                     child: Center(
                       // Adicionar os titulos dos 3 melhores filmes no carrossel
-                      child: ListView(
+                      child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        children: const [
-                          CardDoCarrossel(
-                              texto: 'Filme 1',
-                              imagem: 'assets/image/filme_fundo2.jpg'),
-                          CardDoCarrossel(
-                              texto: 'Filme 2',
-                              imagem: 'assets/image/filme_fundo2.jpg'),
-                          CardDoCarrossel(
-                              texto: 'filme 3',
-                              imagem: 'assets/image/filme_fundo2.jpg'),
-                        ],
+                        itemCount: filmes.length <= 3 ? filmes.length : 3,
+                        itemBuilder: (context, index) {
+                          return CardDoCarrossel(
+                            texto: filmes[index].titulo,
+                            imagem: 'assets/image/filme_fundo2.jpg',
+                          );
+                        },
                       ),
                     ),
                   ),
@@ -145,21 +143,6 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
                           fontSize: 17,
                           color: Colors.white,
                         ),
-                      ),
-                      FloatingActionButton(
-                        backgroundColor: Colors.blue[100],
-                        child: const Icon(Icons.add),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return PaginaAddFilme(
-                                    aoSubimeter: adicionarItem);
-                              },
-                            ),
-                          );
-                        },
                       ),
                     ],
                   ),

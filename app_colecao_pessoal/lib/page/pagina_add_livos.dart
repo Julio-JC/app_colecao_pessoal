@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../profile/infraestructure/data.dart';
+import '../widget/data.dart';
 import '../widget/botao_de_texot.dart';
 import '../widget/tag_genero.dart';
 import '../widget/widget_de_classificacao.dart';
@@ -87,7 +87,6 @@ class _PaginaAddLivrosState extends State<PaginaAddLivros> {
                         ),
                       ),
                     ),
-                    //TODO Subistitir o acesso a data total por ano rolavel
                     Data(titulo: 'Publicado em:', dateTime: _data),
                     Padding(
                       padding: const EdgeInsets.only(top: 10, bottom: 10),
@@ -146,13 +145,25 @@ class _PaginaAddLivrosState extends State<PaginaAddLivros> {
                               aoPessionar: (aoPessionar) {
                                 _generoL = aoPessionar;
                               }),
-                          TagGenero(
-                              genero: 'Fantasia',
-                              aoPessionar: (aoPessionar) {
-                                _generoL = aoPessionar;
-                              }),
                         ],
                       ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TagGenero(
+                                genero: 'Fantasia',
+                                aoPessionar: (aoPessionar) {
+                                  _generoL = aoPessionar;
+                                }),
+                            TagGenero(
+                                genero: 'Terror',
+                                aoPessionar: (aoPessionar) {
+                                  _generoL = aoPessionar;
+                                }),
+                          ]),
                     ),
                     const SizedBox(
                       height: 10,
@@ -175,7 +186,6 @@ class _PaginaAddLivrosState extends State<PaginaAddLivros> {
                     const SizedBox(
                       height: 20,
                     ),
-                    //TODO criar um widget textButton
                     Padding(
                       padding: const EdgeInsets.all(20),
                       child: Row(

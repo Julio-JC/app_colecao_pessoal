@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:app_colecao_pessoal/page/pagina_add_livos.dart';
-import 'package:app_colecao_pessoal/profile/repositorio/repositorio.dart';
 import 'package:app_colecao_pessoal/profile/repositorio/repositorio_de_livros.dart';
 import 'package:app_colecao_pessoal/widget/item_da_lista_livro.dart';
 import 'package:flutter/material.dart';
@@ -85,19 +84,14 @@ class _PaginaListaDeLivrosState extends State<PaginaListaDeLivros> {
                   width: 400,
                   child: Center(
                     // Adicionar os titulos dos 3 melhores filmes no carrossel
-                    child: ListView(
+                    child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      children: const [
-                        CardDoCarrossel(
-                            texto: 'Livro 1',
-                            imagem: 'assets/image/livros_fundo.jpg'),
-                        CardDoCarrossel(
-                            texto: 'Livro 2',
-                            imagem: 'assets/image/livros_fundo.jpg'),
-                        CardDoCarrossel(
-                            texto: 'Livro 3',
-                            imagem: 'assets/image/livros_fundo.jpg'),
-                      ],
+                      itemCount: livros.length <= 3 ? livros.length : 3,
+                      itemBuilder: (context, index) {
+                        return CardDoCarrossel(
+                            texto: livros[index].titulo,
+                            imagem: 'assets/image/livros_fundo.jpg');
+                      },
                     ),
                   ),
                 ),

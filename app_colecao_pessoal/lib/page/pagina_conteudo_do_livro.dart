@@ -1,3 +1,4 @@
+import 'package:app_colecao_pessoal/global/const.dart';
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
@@ -38,7 +39,7 @@ class PaginaConteudoDoLivro extends StatelessWidget {
                           livro!.notaDoUsuario,
                           (index) => const Icon(
                             Icons.star,
-                            color: Colors.amber,
+                            color: kColorEstrela,
                           ),
                         ),
                       ),
@@ -68,7 +69,7 @@ class PaginaConteudoDoLivro extends StatelessWidget {
                   ),
                   const Divider(
                     height: 30,
-                    color: Colors.blue,
+                    color: kCorDivider,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,7 +92,7 @@ class PaginaConteudoDoLivro extends StatelessWidget {
                   ),
                   const Divider(
                     height: 30,
-                    color: Colors.blue,
+                    color: kCorDivider,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -114,7 +115,7 @@ class PaginaConteudoDoLivro extends StatelessWidget {
                   ),
                   const Divider(
                     height: 30,
-                    color: Colors.blue,
+                    color: kCorDivider,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -137,7 +138,7 @@ class PaginaConteudoDoLivro extends StatelessWidget {
                   ),
                   const Divider(
                     height: 30,
-                    color: Colors.blue,
+                    color: kCorDivider,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -160,7 +161,7 @@ class PaginaConteudoDoLivro extends StatelessWidget {
                   ),
                   const Divider(
                     height: 30,
-                    color: Colors.blue,
+                    color: kCorDivider,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,7 +200,7 @@ class PaginaConteudoDoLivro extends StatelessWidget {
                               icon: const Icon(
                                 Icons.edit,
                                 size: 30,
-                                color: Colors.blue,
+                                color: kCorDivider,
                               ),
                             ),
                           ],

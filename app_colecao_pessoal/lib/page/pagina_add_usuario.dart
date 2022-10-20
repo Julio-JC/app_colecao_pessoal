@@ -1,5 +1,4 @@
-import 'package:app_colecao_pessoal/page/pagina_novo_usuario.dart';
-import 'package:app_colecao_pessoal/profile/infraestructure/data.dart';
+import 'package:app_colecao_pessoal/widget/data.dart';
 import 'package:app_colecao_pessoal/widget/botao_de_texot.dart';
 import 'package:flutter/material.dart';
 
@@ -154,14 +153,7 @@ class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
                       ),
                       BotaoDeTexto(
                         tirulo: 'Adicionar usuário',
-                        aoPressionar: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return PaginaNovoUsuario(
-                              receber: adicionarUsuario,
-                            );
-                          }));
-                        },
+                        aoPressionar: () {},
                       ),
                     ],
                   ),

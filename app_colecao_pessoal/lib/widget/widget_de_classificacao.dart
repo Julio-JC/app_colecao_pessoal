@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-//TODO Refaturar o código para não usar funções para retornar widget
-
 class WidgetDeClassificacao extends StatefulWidget {
   const WidgetDeClassificacao(
       {super.key,

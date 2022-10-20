@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/filme.dart';
-import '../models/livro.dart';
 
 const chaveFilmeLista = 'filme_list';
 const chaveLivroLista = 'Livro_list';
