@@ -4,7 +4,7 @@ import '../models/item.dart';
 
 const chaveItemLista = 'item_list';
 
-class RepositorioDeFilmes {
+class Repositorio {
   late SharedPreferences sharedPreferences;
 
   Future<List<Item>> getItemLista() async {

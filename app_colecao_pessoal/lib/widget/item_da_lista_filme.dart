@@ -1,5 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'dart:ui';
+
 import 'package:app_colecao_pessoal/page/pagina_conteudo_do_filme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -7,8 +9,8 @@ import '../profile/models/item.dart';
 import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
-class ItemDaLista extends StatelessWidget {
-  ItemDaLista({super.key, required this.item, required this.removerItem});
+class ItemDaListaFilme extends StatelessWidget {
+  ItemDaListaFilme({super.key, required this.item, required this.removerItem});
 
   Item item;
   DateTime data = DateTime.now();
@@ -66,10 +68,7 @@ class ItemDaLista extends StatelessWidget {
                         const SizedBox(width: 20),
                         Text(
                           item.titulo,
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                          ),
+                          style: Theme.of(context).textTheme.headline6,
                         ),
                       ],
                     ),
@@ -99,7 +98,9 @@ class ItemDaLista extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(right: 10),
                           child: Text(
-                              'Classificação ${item.notaDoUsuario} estrelas'),
+                            'Classificação ${item.notaDoUsuario} estrelas',
+                            style: const TextStyle(color: Colors.black),
+                          ),
                         ),
                       ],
                     ),

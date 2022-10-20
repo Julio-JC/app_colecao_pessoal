@@ -9,11 +9,11 @@ class Usuario {
     required this.autoFavorito,
   });
 
-  String nome;
-  DateTime dataNascimento;
+  String nome = 'Nome';
+  DateTime dataNascimento = DateTime.now();
   String avatarUrl;
-  String generoFilmeFavorito;
-  String generoLivroFavorito;
-  String diretorFavorito;
-  String autoFavorito;
+  String generoFilmeFavorito = 'Genero filme';
+  String generoLivroFavorito = 'Genero Livro';
+  String diretorFavorito = 'Diretor';
+  String autoFavorito = 'Autor';
 }

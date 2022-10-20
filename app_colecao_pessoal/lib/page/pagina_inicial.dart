@@ -1,9 +1,10 @@
-import 'package:app_colecao_pessoal/global/tema_controle.dart';
 import 'package:app_colecao_pessoal/profile/models/usuario.dart';
 import 'package:app_colecao_pessoal/widget/botao_pagina_inicial.dart';
 import 'package:app_colecao_pessoal/page/pagina_lista_de_livros.dart';
 import 'package:app_colecao_pessoal/page/pagina_lista_de_filmes.dart';
 import 'package:flutter/material.dart';
+
+import '../global/app_controller.dart';
 
 class PaginaInicial extends StatefulWidget {
   PaginaInicial({
@@ -25,6 +26,14 @@ class _PaginaInicialState extends State<PaginaInicial> {
         appBar: AppBar(
           centerTitle: true,
           title: const Text('Minha Coleção'),
+          actions: [
+            Switch(
+              value: AppController.instance.isDark,
+              onChanged: (value) {
+                AppController.instance.changeTheme();
+              },
+            ),
+          ],
         ),
         drawer: Drawer(
           child: Padding(
@@ -161,7 +170,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const PaginaListaDeLivros();
+                          return PaginaListaDeLivros();
                         },
                       ),
                     );
@@ -171,17 +180,23 @@ class _PaginaInicialState extends State<PaginaInicial> {
                 Padding(
                   padding: const EdgeInsets.only(left: 8),
                   child: Switch(
-                      value: TemaController.instancia.temas,
-                      onChanged: (value) {
-                        TemaController.instancia.mudancaTema();
-                      }),
+                    value: AppController.instance.isDark,
+                    onChanged: (value) {
+                      AppController.instance.changeTheme();
+                    },
+                  ),
                 )
               ],
             ),
           ),
         ),
         body: Container(
-          decoration: const BoxDecoration(),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                opacity: 0.60,
+                image: AssetImage('assets/image/fundobbtc.jpg'),
+                fit: BoxFit.cover),
+          ),
           child: Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -212,7 +227,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return const PaginaListaDeLivros();
+                            return PaginaListaDeLivros();
                           },
                         ),
                       );

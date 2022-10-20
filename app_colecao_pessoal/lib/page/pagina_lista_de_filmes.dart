@@ -1,10 +1,10 @@
 import 'dart:math';
 import 'package:app_colecao_pessoal/page/pagina_add_filme.dart';
-import 'package:app_colecao_pessoal/profile/repositorio/repositorio_de_filme.dart';
+import 'package:app_colecao_pessoal/profile/repositorio/repositorio.dart';
 import 'package:app_colecao_pessoal/widget/card_do_carrossel.dart';
 import 'package:flutter/material.dart';
 import '../profile/models/item.dart';
-import '../widget/item_da_lista.dart';
+import '../widget/item_da_lista_filme.dart';
 
 class PaginaListaDeFilmes extends StatefulWidget {
   PaginaListaDeFilmes({super.key, this.item});
@@ -14,7 +14,7 @@ class PaginaListaDeFilmes extends StatefulWidget {
 }
 
 class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
-  final RepositorioDeFilmes repositorioDeFilmes = RepositorioDeFilmes();
+  final Repositorio repositorioDeFilmes = Repositorio();
   List<Item> itens = [];
 
   Item? itemDeletado;
@@ -58,16 +58,18 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
     Navigator.of(context).pop();
   }
 
-  melhoresFilmes(context, index) {
-    repositorioDeFilmes.getItemLista().then((value) {
-      final topFilmes = itens[index].titulo.isEmpty ||
-              itens[index].titulo.isEmpty == itens[index].titulo.isEmpty &&
-                  itens[7].notaDoUsuario <= 2
-          ? 'Filme'
-          : itens[1].titulo;
-      return topFilmes;
-    });
-  }
+  //Criar a lógica para adicionar no carrigo de TopFilmes
+
+  // melhoresFilmes(context, index) {
+  //   repositorioDeFilmes.getItemLista().then((value) {
+  //     final topFilmes = itens[index].titulo.isEmpty ||
+  //             itens[index].titulo.isEmpty == itens[index].titulo.isEmpty &&
+  //                 itens[7].notaDoUsuario <= 2
+  //         ? 'Filme'
+  //         : itens[1].titulo;
+  //     return topFilmes;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +127,7 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
                   child: ListView.builder(
                     itemCount: itens.length,
                     itemBuilder: (context, index) {
-                      return ItemDaLista(
+                      return ItemDaListaFilme(
                         item: itens[index],
                         removerItem: removerItem,
                       );
