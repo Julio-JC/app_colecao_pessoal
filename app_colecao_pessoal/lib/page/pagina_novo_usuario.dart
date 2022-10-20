@@ -2,7 +2,6 @@ import 'package:app_colecao_pessoal/page/pagina_add_usuario.dart';
 import 'package:app_colecao_pessoal/widget/card_do_usuario.dart';
 import 'package:app_colecao_pessoal/widget/botao_de_texot.dart';
 import 'package:flutter/material.dart';
-
 import '../profile/models/usuario.dart';
 
 class PaginaNovoUsuario extends StatefulWidget {
