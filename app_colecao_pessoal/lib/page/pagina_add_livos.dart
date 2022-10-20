@@ -88,7 +88,7 @@ class _PaginaAddLivrosState extends State<PaginaAddLivros> {
                       ),
                     ),
                     //TODO Subistitir o acesso a data total por ano rolavel
-                    Data(titulo: 'Lançançando em:', dateTime: _data),
+                    Data(titulo: 'Publicado em:', dateTime: _data),
                     Padding(
                       padding: const EdgeInsets.only(top: 10, bottom: 10),
                       child: TextField(
@@ -126,7 +126,6 @@ class _PaginaAddLivrosState extends State<PaginaAddLivros> {
                         ),
                       ),
                     ),
-
                     Padding(
                       padding: const EdgeInsets.only(left: 10, right: 10),
                       child: Row(

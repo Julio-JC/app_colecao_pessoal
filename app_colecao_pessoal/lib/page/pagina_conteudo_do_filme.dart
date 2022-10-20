@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import '../profile/models/item.dart';
+import '../profile/models/filme.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class PaginaConteudoDoFilme extends StatelessWidget {
-  PaginaConteudoDoFilme({super.key, this.item});
+  PaginaConteudoDoFilme({super.key, this.filme});
 
-  Item? item;
+  Filme? filme;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(item!.titulo),
+        title: Text(filme!.titulo),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -34,7 +34,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                       ),
                       Row(
                         children: List<Widget>.generate(
-                          item!.notaDoUsuario,
+                          filme!.notaDoUsuario,
                           (index) => const Icon(
                             Icons.star,
                             color: Colors.amber,
@@ -58,7 +58,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                         child: SizedBox(
                           height: 20,
                           child: Text(
-                            item!.titulo,
+                            filme!.titulo,
                             style: const TextStyle(fontSize: 18),
                           ),
                         ),
@@ -81,7 +81,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                         child: SizedBox(
                           height: 20,
                           child: Text(
-                            item!.autorDiretor,
+                            filme!.diretor,
                             style: const TextStyle(fontSize: 18),
                           ),
                         ),
@@ -104,7 +104,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                         child: SizedBox(
                           height: 20,
                           child: Text(
-                            item!.produtoraEditora,
+                            filme!.produtora,
                             style: const TextStyle(fontSize: 18),
                           ),
                         ),
@@ -127,8 +127,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                         child: SizedBox(
                           height: 20,
                           child: Text(
-                            DateFormat('yyyy')
-                                .format(item!.anoDeLancamentoPublicacao),
+                            DateFormat('yyyy').format(filme!.anoDeLancamento),
                             style: const TextStyle(fontSize: 18),
                           ),
                         ),
@@ -151,7 +150,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                         child: SizedBox(
                           height: 20,
                           child: Text(
-                            item!.generoDoItem,
+                            filme!.generoDoFilme,
                             style: const TextStyle(fontSize: 18),
                           ),
                         ),
@@ -183,7 +182,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                             width: 350,
                             child: Text(
                               maxLines: null,
-                              item!.sinopse,
+                              filme!.sinopse,
                               style: const TextStyle(fontSize: 18),
                             ),
                           ),

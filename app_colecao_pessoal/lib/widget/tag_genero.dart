@@ -17,7 +17,7 @@ class _TagGeneroState extends State<TagGenero> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(5),
+      padding: const EdgeInsets.all(2),
       child: ChoiceChip(
         label: Text(
           widget.genero,

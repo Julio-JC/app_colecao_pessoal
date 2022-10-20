@@ -1,31 +1,32 @@
 import 'dart:math';
+import 'package:app_colecao_pessoal/page/pagina_add_livos.dart';
 import 'package:app_colecao_pessoal/profile/repositorio/repositorio.dart';
+import 'package:app_colecao_pessoal/profile/repositorio/repositorio_de_livros.dart';
 import 'package:app_colecao_pessoal/widget/item_da_lista_livro.dart';
 import 'package:flutter/material.dart';
-
-import '../profile/models/item.dart';
+import '../profile/models/livro.dart';
 import '../widget/card_do_carrossel.dart';
 
 class PaginaListaDeLivros extends StatefulWidget {
-  PaginaListaDeLivros({super.key, this.itemLivro});
-  Item? itemLivro;
+  const PaginaListaDeLivros({super.key, this.livro});
+  final Livro? livro;
   @override
   State<PaginaListaDeLivros> createState() => _PaginaListaDeLivrosState();
 }
 
 class _PaginaListaDeLivrosState extends State<PaginaListaDeLivros> {
-  final Repositorio repositorioLivros = Repositorio();
-  List<Item> itensL = [];
+  final RepositorioDeLivros repositorioLivros = RepositorioDeLivros();
+  List<Livro> livros = [];
 
-  Item? itemDeletadoL;
+  Livro? itemDeletadoL;
   int? posicaoItemL;
 
   @override
   void initState() {
     super.initState();
-    repositorioLivros.getItemLista().then((value) {
+    repositorioLivros.getLivroLista().then((value) {
       setState(() {
-        itensL = value;
+        livros = value;
       });
     });
   }
@@ -39,20 +40,22 @@ class _PaginaListaDeLivrosState extends State<PaginaListaDeLivros> {
     String generoL,
     int notaL,
   ) {
-    final novoitemLivro = Item(
+    final novoLivro = Livro(
       id: Random().nextDouble().toString(),
       titulo: livro,
-      autorDiretor: autor,
-      anoDeLancamentoPublicacao: anoPublicacao,
-      produtoraEditora: editora,
+      autor: autor,
+      anoDePublicacao: anoPublicacao,
+      editora: editora,
       sinopse: sinopseL,
-      generoDoItem: generoL,
+      generoDoLivro: generoL,
       notaDoUsuario: notaL,
     );
 
     setState(() {
-      itensL.add(novoitemLivro);
+      livros.add(novoLivro);
     });
+
+    repositorioLivros.salvarListaDeLivro(livros);
 
     Navigator.of(context).pop();
   }
@@ -110,10 +113,10 @@ class _PaginaListaDeLivrosState extends State<PaginaListaDeLivros> {
                     borderRadius: BorderRadius.circular(6),
                     color: Colors.white),
                 child: ListView.builder(
-                  itemCount: itensL.length,
+                  itemCount: livros.length,
                   itemBuilder: (context, index) {
                     return ItemDaListaLivro(
-                      itemLivro: itensL[index],
+                      livro: livros[index],
                       removerItemLivro: removerItemLivro,
                     );
                   },
@@ -124,17 +127,32 @@ class _PaginaListaDeLivrosState extends State<PaginaListaDeLivros> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Sua coleção possui ${itensL.length} filmes',
-                      style: const TextStyle(
-                        fontSize: 17,
-                        color: Colors.white,
-                      ),
-                    ),
+                    livros.length <= 1
+                        ? Text(
+                            'Sua coleção possui ${livros.length} livro',
+                            style: const TextStyle(
+                              fontSize: 17,
+                              color: Colors.white,
+                            ),
+                          )
+                        : Text(
+                            'Sua coleção possui ${livros.length} livros',
+                            style: const TextStyle(
+                              fontSize: 17,
+                              color: Colors.white,
+                            ),
+                          ),
                     FloatingActionButton(
                       backgroundColor: Colors.blue[100],
                       child: const Icon(Icons.add),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return PaginaAddLivros(
+                            aoSubimeter: adicionarItemLivro,
+                          );
+                        }));
+                      },
                     ),
                   ],
                 ),
@@ -146,28 +164,28 @@ class _PaginaListaDeLivrosState extends State<PaginaListaDeLivros> {
     );
   }
 
-  void removerItemLivro(Item item) {
-    itemDeletadoL = item;
-    posicaoItemL = itensL.indexOf(item);
+  void removerItemLivro(Livro livro) {
+    itemDeletadoL = livro;
+    posicaoItemL = livros.indexOf(livro);
 
     setState(() {
-      itensL.remove(item);
-      repositorioLivros.salvarListaDeItem(itensL);
+      livros.remove(livro);
+      repositorioLivros.salvarListaDeLivro(livros);
     });
 
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          'Livro ${item.titulo} foi remosvido',
+          'Livro ${livro.titulo} foi removido',
         ),
         action: SnackBarAction(
           label: 'Desfazer',
           onPressed: () {
             setState(() {
-              itensL.insert(posicaoItemL!, itemDeletadoL!);
+              livros.insert(posicaoItemL!, itemDeletadoL!);
             });
-            repositorioLivros.salvarListaDeItem(itensL);
+            repositorioLivros.salvarListaDeLivro(livros);
           },
         ),
         duration: const Duration(seconds: 5),

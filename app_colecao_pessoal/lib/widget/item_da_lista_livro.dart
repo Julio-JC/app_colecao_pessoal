@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import '../page/pagina_conteudo_do_livro.dart';
-import '../profile/models/item.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
+
+import '../profile/models/livro.dart';
 
 // ignore: must_be_immutable
 class ItemDaListaLivro extends StatelessWidget {
   ItemDaListaLivro({
     super.key,
-    required this.itemLivro,
+    required this.livro,
     required this.removerItemLivro,
   });
 
-  Item itemLivro;
+  Livro livro;
   DateTime data = DateTime.now();
-  final Function(Item) removerItemLivro;
+  final Function(Livro) removerItemLivro;
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +27,8 @@ class ItemDaListaLivro extends StatelessWidget {
           MaterialPageRoute(
             builder: (_) {
               return PaginaConteudoDoLivro(
-                itemLivro: itemLivro,
-                key: Key(itemLivro.id),
+                livro: livro,
+                key: Key(livro.id),
               );
             },
           ),
@@ -45,7 +46,7 @@ class ItemDaListaLivro extends StatelessWidget {
                 label: 'Apagar',
                 backgroundColor: Colors.red[200] as Color,
                 onPressed: (context) {
-                  removerItemLivro(itemLivro);
+                  removerItemLivro(livro);
                 },
               ),
             ],
@@ -68,7 +69,7 @@ class ItemDaListaLivro extends StatelessWidget {
                         ),
                         const SizedBox(width: 20),
                         Text(
-                          itemLivro.titulo,
+                          livro.titulo,
                           style: Theme.of(context).textTheme.headline6,
                         ),
                       ],
@@ -85,7 +86,7 @@ class ItemDaListaLivro extends StatelessWidget {
                       children: [
                         ChoiceChip(
                           label: Text(
-                            itemLivro.generoDoItem,
+                            livro.generoDoLivro,
                             style: const TextStyle(fontWeight: FontWeight.w700),
                           ),
                           selected: true,
@@ -99,7 +100,7 @@ class ItemDaListaLivro extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(right: 10),
                           child: Text(
-                              'Classificação ${itemLivro.notaDoUsuario} estrelas'),
+                              'Classificação ${livro.notaDoUsuario} estrelas'),
                         ),
                       ],
                     ),

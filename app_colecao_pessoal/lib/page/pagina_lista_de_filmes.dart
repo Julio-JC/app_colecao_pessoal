@@ -3,30 +3,30 @@ import 'package:app_colecao_pessoal/page/pagina_add_filme.dart';
 import 'package:app_colecao_pessoal/profile/repositorio/repositorio.dart';
 import 'package:app_colecao_pessoal/widget/card_do_carrossel.dart';
 import 'package:flutter/material.dart';
-import '../profile/models/item.dart';
+import '../profile/models/filme.dart';
 import '../widget/item_da_lista_filme.dart';
 
 class PaginaListaDeFilmes extends StatefulWidget {
-  PaginaListaDeFilmes({super.key, this.item});
-  Item? item;
+  const PaginaListaDeFilmes({super.key, this.filme});
+  final Filme? filme;
   @override
   State<PaginaListaDeFilmes> createState() => _MinhaListaDeFilmesState();
 }
 
 class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
   final Repositorio repositorioDeFilmes = Repositorio();
-  List<Item> itens = [];
+  List<Filme> filmes = [];
 
-  Item? itemDeletado;
+  Filme? itemDeletado;
   int? posicaoItem;
 
   @override
   void initState() {
     super.initState();
 
-    repositorioDeFilmes.getItemLista().then((value) {
+    repositorioDeFilmes.getFilmeLista().then((value) {
       setState(() {
-        itens = value;
+        filmes = value;
       });
     });
   }
@@ -40,20 +40,20 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
     String genero,
     int nota,
   ) {
-    final novoItem = Item(
+    final novoFilme = Filme(
       id: Random().nextDouble().toString(),
       titulo: filme,
-      autorDiretor: diretor,
-      anoDeLancamentoPublicacao: anoLancamento,
-      produtoraEditora: produtora,
+      diretor: diretor,
+      anoDeLancamento: anoLancamento,
+      produtora: produtora,
       sinopse: sinopse,
-      generoDoItem: genero,
+      generoDoFilme: genero,
       notaDoUsuario: nota,
     );
     setState(() {
-      itens.add(novoItem);
+      filmes.add(novoFilme);
     });
-    repositorioDeFilmes.salvarListaDeItem(itens);
+    repositorioDeFilmes.salvarListaDeFilme(filmes);
 
     Navigator.of(context).pop();
   }
@@ -125,11 +125,11 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
                       borderRadius: BorderRadius.circular(6),
                       color: Colors.white),
                   child: ListView.builder(
-                    itemCount: itens.length,
+                    itemCount: filmes.length,
                     itemBuilder: (context, index) {
                       return ItemDaListaFilme(
-                        item: itens[index],
-                        removerItem: removerItem,
+                        filme: filmes[index],
+                        removerFilme: removerItem,
                       );
                     },
                   ),
@@ -140,7 +140,7 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Sua coleção possui ${itens.length} filmes',
+                        'Sua coleção possui ${filmes.length} filmes',
                         style: const TextStyle(
                           fontSize: 17,
                           color: Colors.white,
@@ -172,28 +172,28 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
     );
   }
 
-  void removerItem(Item item) {
+  void removerItem(Filme item) {
     itemDeletado = item;
-    posicaoItem = itens.indexOf(item);
+    posicaoItem = filmes.indexOf(item);
 
     setState(() {
-      itens.remove(item);
-      repositorioDeFilmes.salvarListaDeItem(itens);
+      filmes.remove(item);
+      repositorioDeFilmes.salvarListaDeFilme(filmes);
     });
 
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          'Filme ${item.titulo} foi remosvido',
+          'Filme ${item.titulo} foi removido',
         ),
         action: SnackBarAction(
           label: 'Desfazer',
           onPressed: () {
             setState(() {
-              itens.insert(posicaoItem!, itemDeletado!);
+              filmes.insert(posicaoItem!, itemDeletado!);
             });
-            repositorioDeFilmes.salvarListaDeItem(itens);
+            repositorioDeFilmes.salvarListaDeFilme(filmes);
           },
         ),
         duration: const Duration(seconds: 5),

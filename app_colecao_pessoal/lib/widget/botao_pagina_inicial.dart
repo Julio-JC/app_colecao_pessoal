@@ -17,8 +17,8 @@ class BotaoPaginaInicial extends StatelessWidget {
       children: [
         Container(
           margin: const EdgeInsets.all(10),
-          height: 200,
-          width: 180,
+          height: 180,
+          width: 150,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             image: DecorationImage(
@@ -28,16 +28,16 @@ class BotaoPaginaInicial extends StatelessWidget {
           ),
         ),
         Container(
-          height: 200,
-          width: 180,
+          height: 180,
+          width: 150,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             color: const Color.fromARGB(129, 144, 202, 249),
           ),
         ),
         Container(
-          height: 200,
-          width: 180,
+          height: 180,
+          width: 150,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
           ),

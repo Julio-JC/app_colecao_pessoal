@@ -20,7 +20,7 @@ class CardDoUsuario extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 margin: const EdgeInsets.only(top: 20, bottom: 20),
                 height: 120,
                 width: 120,

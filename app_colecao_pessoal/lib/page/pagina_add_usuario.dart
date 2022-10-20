@@ -1,3 +1,4 @@
+import 'package:app_colecao_pessoal/page/pagina_novo_usuario.dart';
 import 'package:app_colecao_pessoal/profile/infraestructure/data.dart';
 import 'package:app_colecao_pessoal/widget/botao_de_texot.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +67,7 @@ class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
           title: const Text('Adicionar do Usuário'),
         ),
         body: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.only(left: 16, right: 16, top: 40),
           child: Card(
             child: Padding(
               padding: const EdgeInsets.all(10),
@@ -153,7 +154,14 @@ class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
                       ),
                       BotaoDeTexto(
                         tirulo: 'Adicionar usuário',
-                        aoPressionar: adicionarUsuario,
+                        aoPressionar: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return PaginaNovoUsuario(
+                              receber: adicionarUsuario,
+                            );
+                          }));
+                        },
                       ),
                     ],
                   ),

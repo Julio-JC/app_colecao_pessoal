@@ -13,7 +13,7 @@ class PaginaNavegacao extends StatefulWidget {
 }
 
 class _PaginaNavegacaoState extends State<PaginaNavegacao> {
-  final List<Widget> pagina = [PaginaInicial(), PaginaNovoUsuario()];
+  final List<Widget> pagina = [const PaginaInicial(), const PaginaAddUsuario()];
   int selecaoIdex = 0;
   @override
   Widget build(BuildContext context) {

@@ -1,22 +1,24 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../models/item.dart';
+import '../models/filme.dart';
+import '../models/livro.dart';
 
-const chaveItemLista = 'item_list';
+const chaveFilmeLista = 'filme_list';
+const chaveLivroLista = 'Livro_list';
 
 class Repositorio {
   late SharedPreferences sharedPreferences;
 
-  Future<List<Item>> getItemLista() async {
+  Future<List<Filme>> getFilmeLista() async {
     sharedPreferences = await SharedPreferences.getInstance();
     final String jsonString =
-        sharedPreferences.getString(chaveItemLista) ?? '[]';
+        sharedPreferences.getString(chaveFilmeLista) ?? '[]';
     final List jsonDecode = json.decode(jsonString) as List;
-    return jsonDecode.map((e) => Item.fromJson(e)).toList();
+    return jsonDecode.map((e) => Filme.fromJson(e)).toList();
   }
 
-  void salvarListaDeItem(List<Item> itens) {
-    final String jsonString = json.encode(itens);
-    sharedPreferences.setString(chaveItemLista, jsonString);
+  void salvarListaDeFilme(List<Filme> filmes) {
+    final String jsonString = json.encode(filmes);
+    sharedPreferences.setString(chaveFilmeLista, jsonString);
   }
 }

@@ -6,9 +6,10 @@ import 'package:flutter/material.dart';
 import '../profile/models/usuario.dart';
 
 class PaginaNovoUsuario extends StatefulWidget {
-  PaginaNovoUsuario({super.key, this.usuario});
+  const PaginaNovoUsuario({super.key, this.usuario, this.receber});
 
-  Usuario? usuario;
+  final Usuario? usuario;
+  final Function()? receber;
   @override
   State<PaginaNovoUsuario> createState() => _NovoUsuarioState();
 }

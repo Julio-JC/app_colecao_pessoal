@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 import '../global/app_controller.dart';
 
 class PaginaInicial extends StatefulWidget {
-  PaginaInicial({
+  const PaginaInicial({
     super.key,
     this.usuario,
   });
 
-  Usuario? usuario;
+  final Usuario? usuario;
 
   @override
   State<PaginaInicial> createState() => _PaginaInicialState();
@@ -36,6 +36,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
           ],
         ),
         drawer: Drawer(
+          // Adicionar no Drawer os dados do usuário
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Column(
@@ -68,7 +69,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
                             SizedBox(
                               width: 40,
                             ),
-                            Text('Julo'),
+                            Text('Nome do usuário'),
                           ],
                         ),
                       ),
@@ -81,11 +82,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
                             SizedBox(
                               width: 40,
                             ),
-                            Text('08/10/1983'
-                                // DateFormat('dd/MM/yyyy')
-                                //     .format(widget.usuario!.dataNascimento),
-                                // style: const TextStyle(fontSize: 18),
-                                ),
+                            Text('01/01/2000'),
                           ],
                         ),
                       ),
@@ -98,7 +95,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
                             SizedBox(
                               width: 40,
                             ),
-                            Text('Ação'),
+                            Text('Genero'),
                           ],
                         ),
                       ),
@@ -111,7 +108,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
                             SizedBox(
                               width: 40,
                             ),
-                            Text('Histórico'),
+                            Text('Genero'),
                           ],
                         ),
                       ),
@@ -124,7 +121,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
                             SizedBox(
                               width: 40,
                             ),
-                            Text('Spilberg'),
+                            Text('Dietor'),
                           ],
                         ),
                       ),
@@ -137,7 +134,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
                             SizedBox(
                               width: 40,
                             ),
-                            Text('Caio'),
+                            Text('Autor'),
                           ],
                         ),
                       ),
@@ -155,7 +152,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return PaginaListaDeFilmes();
+                          return const PaginaListaDeFilmes();
                         },
                       ),
                     );
@@ -170,7 +167,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return PaginaListaDeLivros();
+                          return const PaginaListaDeLivros();
                         },
                       ),
                     );
@@ -182,7 +179,9 @@ class _PaginaInicialState extends State<PaginaInicial> {
                   child: Switch(
                     value: AppController.instance.isDark,
                     onChanged: (value) {
-                      AppController.instance.changeTheme();
+                      setState(() {
+                        AppController.instance.changeTheme();
+                      });
                     },
                   ),
                 )
@@ -208,7 +207,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return PaginaListaDeFilmes();
+                            return const PaginaListaDeFilmes();
                           },
                         ),
                       );
@@ -227,7 +226,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return PaginaListaDeLivros();
+                            return const PaginaListaDeLivros();
                           },
                         ),
                       );

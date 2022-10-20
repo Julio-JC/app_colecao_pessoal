@@ -7,7 +7,7 @@ class Themes {
       backgroundColor: Color(0xffA36EF3),
     ),
     colorScheme: ColorScheme.fromSwatch().copyWith(
-      secondary: Color(0xffA36EF3),
+      secondary: const Color(0xffA36EF3),
     ),
   );
   static final dark = ThemeData(
