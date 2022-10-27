@@ -3,17 +3,21 @@
 import 'package:app_colecao_pessoal/page/pagina_conteudo_do_filme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import '../profile/models/filme.dart';
 import 'package:intl/intl.dart';
+import '../profile/models/filme.dart';
 
 // ignore: must_be_immutable
 class ItemDaListaFilme extends StatelessWidget {
   ItemDaListaFilme(
-      {super.key, required this.filme, required this.removerFilme});
+      {super.key,
+      required this.filme,
+      required this.removerFilme,
+      required this.editarFilme});
 
   Filme filme;
   DateTime data = DateTime.now();
   final Function(Filme) removerFilme;
+  final Function() editarFilme;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +29,7 @@ class ItemDaListaFilme extends StatelessWidget {
             builder: (_) {
               return PaginaConteudoDoFilme(
                 filme: filme,
-                key: Key(filme.id),
+                key: Key(filme.id as String),
               );
             },
           ),
@@ -35,7 +39,7 @@ class ItemDaListaFilme extends StatelessWidget {
         padding: const EdgeInsets.all(2),
         child: Slidable(
           endActionPane: ActionPane(
-            motion: const BehindMotion(),
+            motion: const DrawerMotion(),
             children: [
               SlidableAction(
                 borderRadius: BorderRadius.circular(4),
@@ -44,6 +48,15 @@ class ItemDaListaFilme extends StatelessWidget {
                 backgroundColor: Colors.red[200] as Color,
                 onPressed: (context) {
                   removerFilme(filme);
+                },
+              ),
+              SlidableAction(
+                borderRadius: BorderRadius.circular(4),
+                icon: Icons.edit,
+                label: 'Editar',
+                backgroundColor: Colors.blue[200] as Color,
+                onPressed: (context) {
+                  editarFilme();
                 },
               ),
             ],
@@ -66,7 +79,7 @@ class ItemDaListaFilme extends StatelessWidget {
                         ),
                         const SizedBox(width: 20),
                         Text(
-                          filme.titulo,
+                          filme.titulo!,
                           style: Theme.of(context).textTheme.headline6,
                         ),
                       ],
@@ -83,7 +96,7 @@ class ItemDaListaFilme extends StatelessWidget {
                       children: [
                         ChoiceChip(
                           label: Text(
-                            filme.generoDoFilme,
+                            filme.generoDoFilme!,
                             style: const TextStyle(fontWeight: FontWeight.w700),
                           ),
                           selected: true,

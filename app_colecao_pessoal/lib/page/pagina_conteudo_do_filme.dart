@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../global/const.dart';
-import '../profile/models/filme.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
+import '../profile/models/filme.dart';
 
 // ignore: must_be_immutable
 class PaginaConteudoDoFilme extends StatelessWidget {
@@ -15,7 +15,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(filme!.titulo),
+        title: Text(filme!.titulo!),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -35,7 +35,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                       ),
                       Row(
                         children: List<Widget>.generate(
-                          filme!.notaDoUsuario,
+                          filme!.notaDoUsuario!,
                           (index) => const Icon(
                             Icons.star,
                             color: kColorEstrela,
@@ -59,7 +59,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                         child: SizedBox(
                           height: 20,
                           child: Text(
-                            filme!.titulo,
+                            filme!.titulo!,
                             style: const TextStyle(fontSize: 18),
                           ),
                         ),
@@ -82,7 +82,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                         child: SizedBox(
                           height: 20,
                           child: Text(
-                            filme!.diretor,
+                            filme!.diretor!,
                             style: const TextStyle(fontSize: 18),
                           ),
                         ),
@@ -105,7 +105,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                         child: SizedBox(
                           height: 20,
                           child: Text(
-                            filme!.produtora,
+                            filme!.produtora!,
                             style: const TextStyle(fontSize: 18),
                           ),
                         ),
@@ -128,7 +128,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                         child: SizedBox(
                           height: 20,
                           child: Text(
-                            DateFormat('yyyy').format(filme!.anoDeLancamento),
+                            DateFormat('yyyy').format(filme!.anoDeLancamento!),
                             style: const TextStyle(fontSize: 18),
                           ),
                         ),
@@ -151,7 +151,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                         child: SizedBox(
                           height: 20,
                           child: Text(
-                            filme!.generoDoFilme,
+                            filme!.generoDoFilme!,
                             style: const TextStyle(fontSize: 18),
                           ),
                         ),
@@ -183,30 +183,15 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                             width: 350,
                             child: Text(
                               maxLines: null,
-                              filme!.sinopse,
+                              filme!.sinopse!,
                               style: const TextStyle(fontSize: 18),
                             ),
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 30, right: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.edit,
-                                size: 30,
-                                color: kCorDivider,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
                     ],
                   ),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),

@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:app_colecao_pessoal/page/pagina_add_filme.dart';
+import 'package:app_colecao_pessoal/page/pagina_edicao_filme.dart';
 import 'package:app_colecao_pessoal/profile/repositorio/repositorio.dart';
 import 'package:app_colecao_pessoal/widget/card_do_carrossel.dart';
 import 'package:flutter/material.dart';
@@ -14,25 +15,24 @@ class PaginaListaDeFilmes extends StatefulWidget {
 }
 
 class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
-  final Repositorio repositorioDeFilmes = Repositorio();
+  final _filtroController = TextEditingController();
+  Repositorio repositorioFilme = Repositorio();
   List<Filme> filmes = [];
-  List<Filme> pontuacao = [];
 
-  Filme? itemDeletado;
+  late Filme itemDeletado;
   int? posicaoItem;
 
   @override
   void initState() {
     super.initState();
-
-    repositorioDeFilmes.getFilmeLista().then((value) {
+    repositorioFilme.getFilmeLista().then((value) {
       setState(() {
         filmes = value;
       });
     });
   }
 
-  adicionarItem(
+  adicionarItemFilme(
     String filme,
     String diretor,
     DateTime anoLancamento,
@@ -54,7 +54,7 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
     setState(() {
       filmes.add(novoFilme);
     });
-    repositorioDeFilmes.salvarListaDeFilme(filmes);
+    repositorioFilme.salvarListaDeFilme(filmes);
 
     Navigator.of(context).pop();
   }
@@ -73,11 +73,11 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return PaginaAddFilme(aoSubimeter: adicionarItem);
-                },
-              ),
+              MaterialPageRoute(builder: (context) {
+                return PaginaAddFilme(
+                  aoSubimeter: adicionarItemFilme,
+                );
+              }),
             );
           },
         ),
@@ -86,10 +86,12 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
             padding: const EdgeInsets.all(10),
             child: Column(
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: 16, right: 16),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16),
                   child: TextField(
-                    decoration: InputDecoration(labelText: 'Pesquisar: '),
+                    controller: _filtroController,
+                    decoration: const InputDecoration(labelText: 'Pesquisar: '),
+                    onChanged: pesquisarFilme,
                   ),
                 ),
                 Padding(
@@ -104,7 +106,9 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
                         itemCount: filmes.length <= 3 ? filmes.length : 3,
                         itemBuilder: (context, index) {
                           return CardDoCarrossel(
-                            texto: filmes[index].titulo,
+                            texto: filmes[index].notaDoUsuario! < 3
+                                ? 'Filmes'
+                                : filmes[index].titulo!,
                             imagem: 'assets/image/filme_fundo2.jpg',
                           );
                         },
@@ -128,6 +132,20 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
                       return ItemDaListaFilme(
                         filme: filmes[index],
                         removerFilme: removerItem,
+                        editarFilme: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return PaginaDeEdicaoFilme(
+                                filmes: filmes,
+                                index: index,
+                                repositorioFilme: repositorioFilme,
+                                emMudanca: (value) {
+                                  setState(() {
+                                    filmes = value;
+                                  });
+                                });
+                          }));
+                        },
                       );
                     },
                   ),
@@ -155,32 +173,41 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
     );
   }
 
-  void removerItem(Filme item) {
-    itemDeletado = item;
-    posicaoItem = filmes.indexOf(item);
+  void removerItem(Filme filme) {
+    itemDeletado = filme;
+    posicaoItem = filmes.indexOf(filme);
 
     setState(() {
-      filmes.remove(item);
-      repositorioDeFilmes.salvarListaDeFilme(filmes);
+      filmes.remove(filme);
+      repositorioFilme.salvarListaDeFilme(filmes);
     });
 
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          'Filme ${item.titulo} foi removido',
+          'Filme ${filme.titulo} foi removido',
         ),
         action: SnackBarAction(
           label: 'Desfazer',
           onPressed: () {
             setState(() {
-              filmes.insert(posicaoItem!, itemDeletado!);
+              filmes.insert(posicaoItem!, itemDeletado);
             });
-            repositorioDeFilmes.salvarListaDeFilme(filmes);
           },
         ),
         duration: const Duration(seconds: 5),
       ),
     );
+  }
+
+  void pesquisarFilme(String consultar) {
+    final sugestao = filmes.where((filmes) {
+      final tituloFilme = filmes.titulo!.toLowerCase();
+      final input = consultar.toLowerCase();
+      return tituloFilme.contains(input);
+    }).toList();
+
+    setState(() => filmes = sugestao);
   }
 }

@@ -66,6 +66,16 @@ class _PaginaListaDeLivrosState extends State<PaginaListaDeLivros> {
         centerTitle: true,
         title: const Text('Meus Livros'),
       ),
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.blue[100],
+          child: const Icon(Icons.add),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return PaginaAddLivros(
+                aoSubimeter: adicionarItemLivro,
+              );
+            }));
+          }),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10),
@@ -136,18 +146,6 @@ class _PaginaListaDeLivrosState extends State<PaginaListaDeLivros> {
                               color: Colors.white,
                             ),
                           ),
-                    FloatingActionButton(
-                      backgroundColor: Colors.blue[100],
-                      child: const Icon(Icons.add),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return PaginaAddLivros(
-                            aoSubimeter: adicionarItemLivro,
-                          );
-                        }));
-                      },
-                    ),
                   ],
                 ),
               ),

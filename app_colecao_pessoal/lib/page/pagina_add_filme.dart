@@ -1,11 +1,11 @@
-import 'package:app_colecao_pessoal/widget/data.dart';
-import 'package:app_colecao_pessoal/widget/botao_de_texot.dart';
-import 'package:app_colecao_pessoal/widget/tag_genero.dart';
-import 'package:app_colecao_pessoal/widget/widget_de_classificacao.dart';
 import 'package:flutter/material.dart';
+import '../widget/data.dart';
+import '../widget/botao_de_texot.dart';
+import '../widget/tag_genero.dart';
+import '../widget/widget_de_classificacao.dart';
 
 class PaginaAddFilme extends StatefulWidget {
-  const PaginaAddFilme({super.key, this.aoSubimeter, this.editar});
+  const PaginaAddFilme({super.key, this.aoSubimeter});
 
   final Function(
     String,
@@ -16,7 +16,6 @@ class PaginaAddFilme extends StatefulWidget {
     String,
     int,
   )? aoSubimeter;
-  final Function(List)? editar;
 
   @override
   State<PaginaAddFilme> createState() => _PaginaAddFilmeState();
@@ -31,7 +30,7 @@ class _PaginaAddFilmeState extends State<PaginaAddFilme> {
   String? _genero;
   int? _classificacao;
 
-  submeterItem() {
+  submeterItemFilme() {
     final tituloDoFilme = _tituloController.text;
     final diretorDoFilme = _diretorController.text;
     final dataFilme = _data;
@@ -63,9 +62,7 @@ class _PaginaAddFilmeState extends State<PaginaAddFilme> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text(
-            'Adicionando filme novo',
-          ),
+          title: const Text("Adicionando filme"),
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
@@ -81,19 +78,19 @@ class _PaginaAddFilmeState extends State<PaginaAddFilme> {
                     ),
                     child: TextField(
                       controller: _tituloController,
-                      onSubmitted: (_) => submeterItem(),
+                      onSubmitted: (_) => submeterItemFilme(),
                       decoration: const InputDecoration(
                         labelText: 'Titulo',
                         border: OutlineInputBorder(),
                       ),
                     ),
                   ),
-                  Data(titulo: 'Lançançando em:', dateTime: _data),
+                  Data(titulo: 'Lançado em:', dateTime: _data),
                   Padding(
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child: TextField(
                       controller: _diretorController,
-                      onSubmitted: submeterItem(),
+                      onSubmitted: submeterItemFilme(),
                       decoration: const InputDecoration(
                         labelText: 'Diretor',
                         border: OutlineInputBorder(),
@@ -104,7 +101,7 @@ class _PaginaAddFilmeState extends State<PaginaAddFilme> {
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child: TextField(
                       controller: _produtoraController,
-                      onSubmitted: submeterItem(),
+                      onSubmitted: submeterItemFilme(),
                       decoration: const InputDecoration(
                         labelText: 'Produtora',
                         border: OutlineInputBorder(),
@@ -118,7 +115,7 @@ class _PaginaAddFilmeState extends State<PaginaAddFilme> {
                       child: TextField(
                         maxLines: null,
                         controller: _sinopseController,
-                        onSubmitted: submeterItem(),
+                        onSubmitted: submeterItemFilme(),
                         decoration: const InputDecoration(
                           labelText: 'Sinopse',
                           border: OutlineInputBorder(),
@@ -188,7 +185,7 @@ class _PaginaAddFilmeState extends State<PaginaAddFilme> {
                         ),
                         BotaoDeTexto(
                           tirulo: 'Adicionar filme',
-                          aoPressionar: submeterItem,
+                          aoPressionar: submeterItemFilme,
                         ),
                       ],
                     ),

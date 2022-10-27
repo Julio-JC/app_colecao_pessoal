@@ -1,19 +1,40 @@
 class Usuario {
-  Usuario({
-    required this.nome,
-    required this.dataNascimento,
-    required this.avatarUrl,
-    required this.generoFilmeFavorito,
-    required this.generoLivroFavorito,
-    required this.diretorFavorito,
-    required this.autoFavorito,
-  });
+  String? nomeUsuario;
+  String? dataNascimento;
+  String? avatarUrl;
+  String? generoFilmeFavorito;
+  String? generoLivroFavorito;
+  String? diretorFavorito;
+  String? autorFavorito;
 
-  String nome = 'Nome';
-  DateTime dataNascimento = DateTime.now();
-  String avatarUrl;
-  String generoFilmeFavorito = 'Genero filme';
-  String generoLivroFavorito = 'Genero Livro';
-  String diretorFavorito = 'Diretor';
-  String autoFavorito = 'Autor';
+  Usuario(
+      {this.nomeUsuario,
+      this.dataNascimento,
+      this.avatarUrl,
+      this.generoFilmeFavorito,
+      this.generoLivroFavorito,
+      this.diretorFavorito,
+      this.autorFavorito});
+
+  Usuario.fromJson(Map<String, dynamic> json) {
+    nomeUsuario = json['nomeUsuario'];
+    dataNascimento = json['dataNascimento'];
+    avatarUrl = json['avatarUrl'];
+    generoFilmeFavorito = json['generoFilmeFavorito'];
+    generoLivroFavorito = json['generoLivroFavorito'];
+    diretorFavorito = json['diretorFavorito'];
+    autorFavorito = json['autorFavorito'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['nomeUsuario'] = nomeUsuario;
+    data['dataNascimento'] = dataNascimento;
+    data['avatarUrl'] = avatarUrl;
+    data['generoFilmeFavorito'] = generoFilmeFavorito;
+    data['generoLivroFavorito'] = generoLivroFavorito;
+    data['diretorFavorito'] = diretorFavorito;
+    data['autorFavorito'] = autorFavorito;
+    return data;
+  }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../widget/data.dart';
 import '../widget/botao_de_texot.dart';
 import '../widget/tag_genero.dart';

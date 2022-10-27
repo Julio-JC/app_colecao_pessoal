@@ -1,3 +1,5 @@
+import 'package:app_colecao_pessoal/profile/models/usuario.dart';
+import 'package:app_colecao_pessoal/profile/repositorio/repositorio_usuario.dart';
 import 'package:app_colecao_pessoal/widget/data.dart';
 import 'package:app_colecao_pessoal/widget/botao_de_texot.dart';
 import 'package:flutter/material.dart';
@@ -5,24 +7,16 @@ import 'package:flutter/material.dart';
 class PaginaAddUsuario extends StatefulWidget {
   const PaginaAddUsuario({
     super.key,
-    this.aoPressionar,
   });
-
-  final Function(
-    String,
-    DateTime,
-    String,
-    String,
-    String,
-    String,
-    String,
-  )? aoPressionar;
 
   @override
   State<PaginaAddUsuario> createState() => _PaginaAddUsuarioState();
 }
 
 class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
+  late final RepositorioUsuario repositorioUsuario;
+  late final Usuario usuario;
+
   final TextEditingController _nomeController = TextEditingController();
   final DateTime _dataNasc = DateTime.now();
   final TextEditingController _avatarController = TextEditingController();
@@ -32,29 +26,26 @@ class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
   final TextEditingController _autorFavController = TextEditingController();
 
   adicionarUsuario() {
-    final nomeUsuario = _nomeController.text;
-    final nascimento = _dataNasc;
-    final avatar = _avatarController.text;
-    final generodoFilmeFav = _generoFilmeController.text;
-    final generoDoLivroFav = _generoLivroController.text;
-    final diretorFav = _diretorFavController.text;
-    final autorFav = _autorFavController.text;
+    usuario = Usuario(
+      nomeUsuario: _nomeController.text,
+      dataNascimento: _dataNasc.toString(),
+      avatarUrl: _avatarController.text,
+      generoFilmeFavorito: _generoFilmeController.text,
+      autorFavorito: _generoLivroController.text,
+      diretorFavorito: _diretorFavController.text,
+      generoLivroFavorito: _generoLivroController.text,
+    );
 
-    if (nomeUsuario.isEmpty) {
-      return;
-    }
+    repositorioUsuario.salvarUsuario(usuario);
 
-    if (widget.aoPressionar != null) {
-      widget.aoPressionar!(
-        nomeUsuario,
-        nascimento,
-        avatar,
-        generodoFilmeFav,
-        generoDoLivroFav,
-        diretorFav,
-        autorFav,
-      );
-    }
+    Navigator.pushNamed(context, '/PaginaNavegacao');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    repositorioUsuario = RepositorioUsuario();
   }
 
   @override
@@ -102,7 +93,7 @@ class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
                       //onChanged: (_) => adicionarUsuario(),
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Genero filme favorito',
+                        labelText: 'Gênero filme favorito',
                       ),
                     ),
                   ),
@@ -113,7 +104,7 @@ class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
                       //onChanged: (_) => adicionarUsuario(),
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Genero Livro favorito',
+                        labelText: 'Gênero Livro favorito',
                       ),
                     ),
                   ),
@@ -153,7 +144,7 @@ class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
                       ),
                       BotaoDeTexto(
                         tirulo: 'Adicionar usuário',
-                        aoPressionar: () {},
+                        aoPressionar: adicionarUsuario,
                       ),
                     ],
                   ),

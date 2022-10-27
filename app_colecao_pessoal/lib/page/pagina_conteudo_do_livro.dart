@@ -129,7 +129,8 @@ class PaginaConteudoDoLivro extends StatelessWidget {
                         child: SizedBox(
                           height: 20,
                           child: Text(
-                            DateFormat('yyyy').format(livro!.anoDePublicacao),
+                            DateFormat('dd/MM/yyyy')
+                                .format(livro!.anoDePublicacao),
                             style: const TextStyle(fontSize: 18),
                           ),
                         ),
@@ -190,22 +191,9 @@ class PaginaConteudoDoLivro extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 30, right: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.edit,
-                                size: 30,
-                                color: kCorDivider,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
+                      const SizedBox(
+                        height: 20,
+                      ),
                     ],
                   ),
                 ],

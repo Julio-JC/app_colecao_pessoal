@@ -1,27 +1,43 @@
 import 'package:app_colecao_pessoal/global/const.dart';
 import 'package:app_colecao_pessoal/profile/models/usuario.dart';
+import 'package:app_colecao_pessoal/profile/repositorio/repositorio_usuario.dart';
 import 'package:app_colecao_pessoal/widget/botao_pagina_inicial.dart';
 import 'package:app_colecao_pessoal/page/pagina_lista_de_livros.dart';
 import 'package:app_colecao_pessoal/page/pagina_lista_de_filmes.dart';
 import 'package:flutter/material.dart';
-
 import '../global/app_controller.dart';
 
 class PaginaInicial extends StatefulWidget {
-  const PaginaInicial({
+  PaginaInicial({
     super.key,
     this.usuario,
   });
 
-  final Usuario? usuario;
-
+  Usuario? usuario;
   @override
   State<PaginaInicial> createState() => _PaginaInicialState();
 }
 
 class _PaginaInicialState extends State<PaginaInicial> {
+  RepositorioUsuario repositorioUsuario = RepositorioUsuario();
+
+  @override
+  void initState() {
+    super.initState();
+    repositorioUsuario.getUsiario().then((value) {
+      setState(() {
+        widget.usuario = value;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final avatar = widget.usuario == null || widget.usuario!.avatarUrl!.isEmpty
+        ? const CircleAvatar(child: Icon(Icons.person))
+        : CircleAvatar(
+            backgroundImage: NetworkImage(widget.usuario!.avatarUrl!),
+          );
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -36,7 +52,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.40,
+                  height: MediaQuery.of(context).size.height * 0.50,
                   width: double.infinity,
                   child: Column(
                     children: [
@@ -44,25 +60,22 @@ class _PaginaInicialState extends State<PaginaInicial> {
                         margin: const EdgeInsets.only(top: 20, bottom: 20),
                         height: 70,
                         width: 70,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.amber,
-                          image: DecorationImage(
-                            image:
-                                AssetImage('assets/image/icone-do-perfil.jpg'),
-                          ),
-                        ),
+                        child: avatar,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text('Nome: '),
-                            SizedBox(
+                          children: [
+                            const Text('Nome: '),
+                            const SizedBox(
                               width: 40,
                             ),
-                            Text('Nome do usuário'),
+                            SizedBox(
+                              child: widget.usuario != null
+                                  ? Text(widget.usuario!.nomeUsuario!)
+                                  : const Text(''),
+                            ),
                           ],
                         ),
                       ),
@@ -70,12 +83,31 @@ class _PaginaInicialState extends State<PaginaInicial> {
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text('Data de nascimento: '),
-                            SizedBox(
+                          children: [
+                            const Text('Data de nasc: '),
+                            const SizedBox(
                               width: 40,
                             ),
-                            Text('01/01/2000'),
+                            widget.usuario != null
+                                ? Text(widget.usuario!.dataNascimento!)
+                                : const Text(''),
+                          ], //DateFormat('d/MM/yyyy').format(widget.dateTime),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(' Meu Tipo de filme: '),
+                            const SizedBox(
+                              width: 40,
+                            ),
+                            SizedBox(
+                              child: widget.usuario != null
+                                  ? Text(widget.usuario!.generoFilmeFavorito!)
+                                  : const Text(''),
+                            ),
                           ],
                         ),
                       ),
@@ -83,12 +115,16 @@ class _PaginaInicialState extends State<PaginaInicial> {
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text('Genero filme favorito: '),
-                            SizedBox(
+                          children: [
+                            const Text('Meu tipo de Livro: '),
+                            const SizedBox(
                               width: 40,
                             ),
-                            Text('Genero'),
+                            SizedBox(
+                              child: widget.usuario != null
+                                  ? Text(widget.usuario!.generoLivroFavorito!)
+                                  : const Text(''),
+                            ),
                           ],
                         ),
                       ),
@@ -96,12 +132,16 @@ class _PaginaInicialState extends State<PaginaInicial> {
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text('Genero livro favorito: '),
-                            SizedBox(
+                          children: [
+                            const Text('Diretor favorito: '),
+                            const SizedBox(
                               width: 40,
                             ),
-                            Text('Genero'),
+                            SizedBox(
+                              child: widget.usuario != null
+                                  ? Text(widget.usuario!.diretorFavorito!)
+                                  : const Text(''),
+                            )
                           ],
                         ),
                       ),
@@ -109,25 +149,16 @@ class _PaginaInicialState extends State<PaginaInicial> {
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text('Diretor favorito: '),
-                            SizedBox(
+                          children: [
+                            const Text('Autor favorito: '),
+                            const SizedBox(
                               width: 40,
                             ),
-                            Text('Dietor'),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text('Autor favorito: '),
                             SizedBox(
-                              width: 40,
+                              child: widget.usuario != null
+                                  ? Text(widget.usuario!.autorFavorito!)
+                                  : const Text(''),
                             ),
-                            Text('Autor'),
                           ],
                         ),
                       ),
@@ -156,14 +187,14 @@ class _PaginaInicialState extends State<PaginaInicial> {
                   leading: const Icon(Icons.book),
                   title: const Text('Livros'),
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return const PaginaListaDeLivros();
-                        },
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) {
+                    //       return const PaginaListaDeLivros();
+                    //     },
+                    //   ),
+                    // );
                   },
                 ),
                 //Adicionar aqui informação da quantidade da lista de livros
