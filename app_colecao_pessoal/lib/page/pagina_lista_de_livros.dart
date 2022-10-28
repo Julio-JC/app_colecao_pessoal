@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:app_colecao_pessoal/page/pagina_add_livos.dart';
+import 'package:app_colecao_pessoal/page/pagina_edicao_livro.dart';
 import 'package:app_colecao_pessoal/profile/repositorio/repositorio_de_livros.dart';
 import 'package:app_colecao_pessoal/widget/item_da_lista_livro.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +15,12 @@ class PaginaListaDeLivros extends StatefulWidget {
 }
 
 class _PaginaListaDeLivrosState extends State<PaginaListaDeLivros> {
-  final RepositorioDeLivros repositorioLivros = RepositorioDeLivros();
+  final _filtroController = TextEditingController();
+  RepositorioDeLivros repositorioLivros = RepositorioDeLivros();
   List<Livro> livros = [];
+  List<Livro> livrosFiltrados = [];
 
-  Livro? itemDeletadoL;
+  late Livro itemDeletadoL;
   int? posicaoItemL;
 
   @override
@@ -26,6 +29,7 @@ class _PaginaListaDeLivrosState extends State<PaginaListaDeLivros> {
     repositorioLivros.getLivroLista().then((value) {
       setState(() {
         livros = value;
+        livrosFiltrados = livros;
       });
     });
   }
@@ -53,7 +57,6 @@ class _PaginaListaDeLivrosState extends State<PaginaListaDeLivros> {
     setState(() {
       livros.add(novoLivro);
     });
-
     repositorioLivros.salvarListaDeLivro(livros);
 
     Navigator.of(context).pop();
@@ -67,24 +70,30 @@ class _PaginaListaDeLivrosState extends State<PaginaListaDeLivros> {
         title: const Text('Meus Livros'),
       ),
       floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.blue[100],
-          child: const Icon(Icons.add),
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
+        backgroundColor: Colors.blue[100],
+        child: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) {
               return PaginaAddLivros(
                 aoSubimeter: adicionarItemLivro,
               );
-            }));
-          }),
+            }),
+          );
+        },
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 16, right: 16),
+              Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16),
                 child: TextField(
-                  decoration: InputDecoration(labelText: 'Pesquisar: '),
+                  controller: _filtroController,
+                  decoration: const InputDecoration(labelText: 'Pesquisar: '),
+                  onChanged: (value) => pesquisarLivro(value),
                 ),
               ),
               Padding(
@@ -99,7 +108,9 @@ class _PaginaListaDeLivrosState extends State<PaginaListaDeLivros> {
                       itemCount: livros.length <= 3 ? livros.length : 3,
                       itemBuilder: (context, index) {
                         return CardDoCarrossel(
-                            texto: livros[index].titulo,
+                            texto: livros[index].notaDoUsuario! < 3
+                                ? 'Filmes'
+                                : livros[index].titulo!,
                             imagem: 'assets/image/livros_fundo.jpg');
                       },
                     ),
@@ -117,11 +128,28 @@ class _PaginaListaDeLivrosState extends State<PaginaListaDeLivros> {
                     borderRadius: BorderRadius.circular(6),
                     color: Colors.white),
                 child: ListView.builder(
-                  itemCount: livros.length,
+                  itemCount: livrosFiltrados.length,
                   itemBuilder: (context, index) {
                     return ItemDaListaLivro(
-                      livro: livros[index],
+                      livro: livrosFiltrados[index],
                       removerItemLivro: removerItemLivro,
+                      editarLivro: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return PaginaDeEdicaoLivro(
+                              livros: livrosFiltrados,
+                              index: index,
+                              repositorioLivro: repositorioLivros,
+                              emMudanca: (value) {
+                                setState(() {
+                                  livrosFiltrados = value;
+                                });
+                              },
+                            );
+                          }),
+                        );
+                      },
                     );
                   },
                 ),
@@ -175,7 +203,7 @@ class _PaginaListaDeLivrosState extends State<PaginaListaDeLivros> {
           label: 'Desfazer',
           onPressed: () {
             setState(() {
-              livros.insert(posicaoItemL!, itemDeletadoL!);
+              livros.insert(posicaoItemL!, itemDeletadoL);
             });
             repositorioLivros.salvarListaDeLivro(livros);
           },
@@ -183,5 +211,15 @@ class _PaginaListaDeLivrosState extends State<PaginaListaDeLivros> {
         duration: const Duration(seconds: 5),
       ),
     );
+  }
+
+  void pesquisarLivro(String consultar) {
+    final sugestao = livros.where((livro) {
+      final tituloLivro = livro.titulo!.toLowerCase();
+      final input = consultar.toLowerCase();
+      return tituloLivro.contains(input);
+    }).toList();
+
+    setState(() => livrosFiltrados = sugestao);
   }
 }

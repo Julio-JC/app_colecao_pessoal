@@ -6,6 +6,7 @@ import 'package:app_colecao_pessoal/page/pagina_lista_de_livros.dart';
 import 'package:app_colecao_pessoal/page/pagina_lista_de_filmes.dart';
 import 'package:flutter/material.dart';
 import '../global/app_controller.dart';
+import 'package:intl/intl.dart';
 
 class PaginaInicial extends StatefulWidget {
   PaginaInicial({
@@ -89,7 +90,10 @@ class _PaginaInicialState extends State<PaginaInicial> {
                               width: 40,
                             ),
                             widget.usuario != null
-                                ? Text(widget.usuario!.dataNascimento!)
+                                ? Text(
+                                    DateFormat('dd/MM/yyyy').format(
+                                        widget.usuario!.dataNascimento!),
+                                  )
                                 : const Text(''),
                           ], //DateFormat('d/MM/yyyy').format(widget.dateTime),
                         ),

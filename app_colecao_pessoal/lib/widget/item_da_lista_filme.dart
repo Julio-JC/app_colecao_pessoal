@@ -29,7 +29,7 @@ class ItemDaListaFilme extends StatelessWidget {
             builder: (_) {
               return PaginaConteudoDoFilme(
                 filme: filme,
-                key: Key(filme.id as String),
+                key: Key(filme.id.toString()),
               );
             },
           ),

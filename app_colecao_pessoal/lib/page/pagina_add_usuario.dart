@@ -28,7 +28,7 @@ class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
   adicionarUsuario() {
     usuario = Usuario(
       nomeUsuario: _nomeController.text,
-      dataNascimento: _dataNasc.toString(),
+      dataNascimento: _dataNasc,
       avatarUrl: _avatarController.text,
       generoFilmeFavorito: _generoFilmeController.text,
       autorFavorito: _generoLivroController.text,

@@ -18,6 +18,7 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
   final _filtroController = TextEditingController();
   Repositorio repositorioFilme = Repositorio();
   List<Filme> filmes = [];
+  List<Filme> filmesFiltrados = [];
 
   late Filme itemDeletado;
   int? posicaoItem;
@@ -28,6 +29,7 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
     repositorioFilme.getFilmeLista().then((value) {
       setState(() {
         filmes = value;
+        filmesFiltrados = filmes;
       });
     });
   }
@@ -91,7 +93,7 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
                   child: TextField(
                     controller: _filtroController,
                     decoration: const InputDecoration(labelText: 'Pesquisar: '),
-                    onChanged: pesquisarFilme,
+                    onChanged: (value) => pesquisarFilme(value),
                   ),
                 ),
                 Padding(
@@ -127,21 +129,21 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
                       borderRadius: BorderRadius.circular(6),
                       color: Colors.white),
                   child: ListView.builder(
-                    itemCount: filmes.length,
+                    itemCount: filmesFiltrados.length,
                     itemBuilder: (context, index) {
                       return ItemDaListaFilme(
-                        filme: filmes[index],
-                        removerFilme: removerItem,
+                        filme: filmesFiltrados[index],
+                        removerFilme: removerItemFilme,
                         editarFilme: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
                             return PaginaDeEdicaoFilme(
-                                filmes: filmes,
+                                filmes: filmesFiltrados,
                                 index: index,
                                 repositorioFilme: repositorioFilme,
                                 emMudanca: (value) {
                                   setState(() {
-                                    filmes = value;
+                                    filmesFiltrados = value;
                                   });
                                 });
                           }));
@@ -155,13 +157,21 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Sua coleção possui ${filmes.length} filmes',
-                        style: const TextStyle(
-                          fontSize: 17,
-                          color: Colors.white,
-                        ),
-                      ),
+                      filmes.length <= 1
+                          ? Text(
+                              'Sua coleção possui ${filmes.length} filme',
+                              style: const TextStyle(
+                                fontSize: 17,
+                                color: Colors.white,
+                              ),
+                            )
+                          : Text(
+                              'Sua coleção possui ${filmes.length} filmes',
+                              style: const TextStyle(
+                                fontSize: 17,
+                                color: Colors.white,
+                              ),
+                            ),
                     ],
                   ),
                 ),
@@ -173,7 +183,7 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
     );
   }
 
-  void removerItem(Filme filme) {
+  void removerItemFilme(Filme filme) {
     itemDeletado = filme;
     posicaoItem = filmes.indexOf(filme);
 
@@ -202,12 +212,12 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
   }
 
   void pesquisarFilme(String consultar) {
-    final sugestao = filmes.where((filmes) {
-      final tituloFilme = filmes.titulo!.toLowerCase();
+    final sugestao = filmes.where((filme) {
+      final tituloFilme = filme.titulo!.toLowerCase();
       final input = consultar.toLowerCase();
       return tituloFilme.contains(input);
     }).toList();
 
-    setState(() => filmes = sugestao);
+    setState(() => filmesFiltrados = sugestao);
   }
 }

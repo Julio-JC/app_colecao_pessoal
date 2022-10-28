@@ -13,6 +13,7 @@ class Data extends StatefulWidget {
 }
 
 class _DataState extends State<Data> {
+  final DateTime _date = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -36,15 +37,15 @@ class _DataState extends State<Data> {
             child: Center(
               child: IconButton(
                 onPressed: () async {
-                  final data = await showDatePicker(
+                  final novaData = await showDatePicker(
                     context: context,
-                    initialDate: DateTime.now(),
+                    initialDate: _date,
                     lastDate: DateTime(2100),
                     firstDate: DateTime(1900),
                   );
-                  if (data != null && data != widget.dateTime) {
+                  if (novaData != null && novaData != _date) {
                     setState(() {
-                      widget.dateTime = data;
+                      widget.dateTime = novaData;
                     });
                   }
                 },
@@ -61,7 +62,7 @@ class _DataState extends State<Data> {
               borderRadius: BorderRadius.circular(25),
             ),
             child: Text(
-              DateFormat('d/MM/yyyy').format(widget.dateTime),
+              DateFormat('dd/MM/yyyy').format(widget.dateTime),
               style: const TextStyle(fontSize: 18),
             ),
           )

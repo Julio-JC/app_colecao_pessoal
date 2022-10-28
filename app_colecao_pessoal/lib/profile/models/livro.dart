@@ -10,21 +10,42 @@ class Livro {
     required this.notaDoUsuario,
   });
 
-  String id;
-  String titulo;
-  String autor;
-  DateTime anoDePublicacao;
-  String editora;
-  String sinopse;
-  String generoDoLivro;
-  int notaDoUsuario;
+  String? id;
+  String? titulo;
+  String? autor;
+  DateTime? anoDePublicacao;
+  String? editora;
+  String? sinopse;
+  String? generoDoLivro;
+  int? notaDoUsuario;
+
+  Livro copy({
+    String? id,
+    String? titulo,
+    String? autor,
+    DateTime? anoDePublicacao,
+    String? editora,
+    String? sinopse,
+    String? generoDoLivro,
+    int? notaDoUsuario,
+  }) =>
+      Livro(
+        id: id ?? this.id,
+        titulo: titulo ?? this.titulo,
+        autor: autor ?? this.autor,
+        anoDePublicacao: anoDePublicacao ?? this.anoDePublicacao,
+        editora: editora ?? this.editora,
+        sinopse: sinopse ?? this.sinopse,
+        generoDoLivro: generoDoLivro ?? this.generoDoLivro,
+        notaDoUsuario: notaDoUsuario ?? this.notaDoUsuario,
+      );
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
       'titulo': titulo,
       'autor': autor,
-      'anoDePublicacao': anoDePublicacao.toIso8601String(),
+      'anoDePublicacao': anoDePublicacao!.toIso8601String(),
       'produtora': editora,
       'sinopse': sinopse,
       'generoDoLivro': generoDoLivro,

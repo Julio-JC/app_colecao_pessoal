@@ -45,6 +45,14 @@ class _PaginaAddFilmeState extends State<PaginaAddFilme> {
       return;
     }
 
+    // if (tituloDoFilme.isEmpty ||
+    //     diretorDoFilme.isEmpty ||
+    //     produtoraDoFilme.isEmpty ||
+    //     sinopseDoFilme.isEmpty ||
+    //     generoFilme!.isEmpty) {
+    //   return showAlertDialog(context);
+    // }
+
     widget.aoSubimeter!(
       tituloDoFilme,
       diretorDoFilme,
@@ -197,5 +205,25 @@ class _PaginaAddFilmeState extends State<PaginaAddFilme> {
         ),
       ),
     );
+  }
+
+  void showAlertDialog(BuildContext context) {
+    Widget botaoOk = BotaoDeTexto(
+      tirulo: 'Ok',
+      aoPressionar: () {
+        Navigator.of(context).pop();
+      },
+    );
+    AlertDialog dialog = AlertDialog(
+      actions: [botaoOk],
+      title: const Text('IMPORTANTE'),
+      content: const Text('Todos os campos devem ser preechidos!'),
+    );
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return dialog;
+        });
   }
 }

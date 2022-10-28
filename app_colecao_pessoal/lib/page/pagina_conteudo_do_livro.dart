@@ -15,7 +15,7 @@ class PaginaConteudoDoLivro extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          livro!.titulo,
+          livro!.titulo!,
         ),
       ),
       body: Padding(
@@ -36,7 +36,7 @@ class PaginaConteudoDoLivro extends StatelessWidget {
                       ),
                       Row(
                         children: List<Widget>.generate(
-                          livro!.notaDoUsuario,
+                          livro!.notaDoUsuario!,
                           (index) => const Icon(
                             Icons.star,
                             color: kColorEstrela,
@@ -60,7 +60,7 @@ class PaginaConteudoDoLivro extends StatelessWidget {
                         child: SizedBox(
                           height: 20,
                           child: Text(
-                            livro!.titulo,
+                            livro!.titulo!,
                             style: const TextStyle(fontSize: 18),
                           ),
                         ),
@@ -83,7 +83,7 @@ class PaginaConteudoDoLivro extends StatelessWidget {
                         child: SizedBox(
                           height: 20,
                           child: Text(
-                            livro!.autor,
+                            livro!.autor!,
                             style: const TextStyle(fontSize: 18),
                           ),
                         ),
@@ -98,7 +98,7 @@ class PaginaConteudoDoLivro extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        'Produtora: ',
+                        'Editora: ',
                         style: TextStyle(fontSize: 16),
                       ),
                       Padding(
@@ -106,7 +106,7 @@ class PaginaConteudoDoLivro extends StatelessWidget {
                         child: SizedBox(
                           height: 20,
                           child: Text(
-                            livro!.editora,
+                            livro!.editora!,
                             style: const TextStyle(fontSize: 18),
                           ),
                         ),
@@ -121,7 +121,7 @@ class PaginaConteudoDoLivro extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        'Ano de Publicação: ',
+                        'Publicação: ',
                         style: TextStyle(fontSize: 16),
                       ),
                       Padding(
@@ -130,7 +130,7 @@ class PaginaConteudoDoLivro extends StatelessWidget {
                           height: 20,
                           child: Text(
                             DateFormat('dd/MM/yyyy')
-                                .format(livro!.anoDePublicacao),
+                                .format(livro!.anoDePublicacao!),
                             style: const TextStyle(fontSize: 18),
                           ),
                         ),
@@ -153,7 +153,7 @@ class PaginaConteudoDoLivro extends StatelessWidget {
                         child: SizedBox(
                           height: 20,
                           child: Text(
-                            livro!.generoDoLivro,
+                            livro!.generoDoLivro!,
                             style: const TextStyle(fontSize: 18),
                           ),
                         ),
@@ -185,7 +185,7 @@ class PaginaConteudoDoLivro extends StatelessWidget {
                             width: 350,
                             child: Text(
                               maxLines: null,
-                              livro!.sinopse,
+                              livro!.sinopse!,
                               style: const TextStyle(fontSize: 18),
                             ),
                           ),

@@ -4,11 +4,10 @@ import '../global/const.dart';
 import 'package:intl/intl.dart';
 import '../profile/models/filme.dart';
 
-// ignore: must_be_immutable
 class PaginaConteudoDoFilme extends StatelessWidget {
-  PaginaConteudoDoFilme({super.key, this.filme});
+  const PaginaConteudoDoFilme({super.key, this.filme});
 
-  Filme? filme;
+  final Filme? filme;
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +119,7 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        'Ano de lançamento: ',
+                        'lançamento: ',
                         style: TextStyle(fontSize: 16),
                       ),
                       Padding(
@@ -128,7 +127,8 @@ class PaginaConteudoDoFilme extends StatelessWidget {
                         child: SizedBox(
                           height: 20,
                           child: Text(
-                            DateFormat('yyyy').format(filme!.anoDeLancamento!),
+                            DateFormat('dd/MM/yyyy')
+                                .format(filme!.anoDeLancamento!),
                             style: const TextStyle(fontSize: 18),
                           ),
                         ),

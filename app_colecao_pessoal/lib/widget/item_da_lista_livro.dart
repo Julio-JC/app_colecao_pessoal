@@ -12,11 +12,13 @@ class ItemDaListaLivro extends StatelessWidget {
     super.key,
     required this.livro,
     required this.removerItemLivro,
+    required this.editarLivro,
   });
 
   Livro livro;
   DateTime data = DateTime.now();
   final Function(Livro) removerItemLivro;
+  final Function() editarLivro;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class ItemDaListaLivro extends StatelessWidget {
             builder: (_) {
               return PaginaConteudoDoLivro(
                 livro: livro,
-                key: Key(livro.id),
+                key: Key(livro.id.toString()),
               );
             },
           ),
@@ -47,6 +49,15 @@ class ItemDaListaLivro extends StatelessWidget {
                 backgroundColor: Colors.red[200] as Color,
                 onPressed: (context) {
                   removerItemLivro(livro);
+                },
+              ),
+              SlidableAction(
+                borderRadius: BorderRadius.circular(4),
+                icon: Icons.edit,
+                label: 'Editar',
+                backgroundColor: Colors.blue[200] as Color,
+                onPressed: (context) {
+                  editarLivro();
                 },
               ),
             ],
@@ -69,7 +80,7 @@ class ItemDaListaLivro extends StatelessWidget {
                         ),
                         const SizedBox(width: 20),
                         Text(
-                          livro.titulo,
+                          livro.titulo!,
                           style: Theme.of(context).textTheme.headline6,
                         ),
                       ],
@@ -86,7 +97,7 @@ class ItemDaListaLivro extends StatelessWidget {
                       children: [
                         ChoiceChip(
                           label: Text(
-                            livro.generoDoLivro,
+                            livro.generoDoLivro!,
                             style: const TextStyle(fontWeight: FontWeight.w700),
                           ),
                           selected: true,

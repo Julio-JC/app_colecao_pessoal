@@ -1,6 +1,6 @@
 class Usuario {
   String? nomeUsuario;
-  String? dataNascimento;
+  DateTime? dataNascimento;
   String? avatarUrl;
   String? generoFilmeFavorito;
   String? generoLivroFavorito;
@@ -18,7 +18,7 @@ class Usuario {
 
   Usuario.fromJson(Map<String, dynamic> json) {
     nomeUsuario = json['nomeUsuario'];
-    dataNascimento = json['dataNascimento'];
+    dataNascimento = DateTime.parse(json['dataNascimento']);
     avatarUrl = json['avatarUrl'];
     generoFilmeFavorito = json['generoFilmeFavorito'];
     generoLivroFavorito = json['generoLivroFavorito'];
@@ -29,7 +29,7 @@ class Usuario {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['nomeUsuario'] = nomeUsuario;
-    data['dataNascimento'] = dataNascimento;
+    data['dataNascimento'] = dataNascimento.toString();
     data['avatarUrl'] = avatarUrl;
     data['generoFilmeFavorito'] = generoFilmeFavorito;
     data['generoLivroFavorito'] = generoLivroFavorito;
