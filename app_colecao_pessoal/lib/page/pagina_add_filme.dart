@@ -22,6 +22,8 @@ class PaginaAddFilme extends StatefulWidget {
 }
 
 class _PaginaAddFilmeState extends State<PaginaAddFilme> {
+  final formKey = GlobalKey<FormState>();
+
   final TextEditingController _tituloController = TextEditingController();
   final TextEditingController _diretorController = TextEditingController();
   final DateTime _data = DateTime.now();
@@ -39,19 +41,13 @@ class _PaginaAddFilmeState extends State<PaginaAddFilme> {
     final generoFilme = _genero;
     final estrelas = _classificacao;
 
+    formKey.currentState?.validate();
+
     if (tituloDoFilme.isEmpty ||
         diretorDoFilme.isEmpty ||
         produtoraDoFilme.isEmpty) {
       return;
     }
-
-    // if (tituloDoFilme.isEmpty ||
-    //     diretorDoFilme.isEmpty ||
-    //     produtoraDoFilme.isEmpty ||
-    //     sinopseDoFilme.isEmpty ||
-    //     generoFilme!.isEmpty) {
-    //   return showAlertDialog(context);
-    // }
 
     widget.aoSubimeter!(
       tituloDoFilme,
@@ -77,153 +73,161 @@ class _PaginaAddFilmeState extends State<PaginaAddFilme> {
           child: Card(
             child: Padding(
               padding: const EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 20,
-                      bottom: 10,
-                    ),
-                    child: TextField(
-                      controller: _tituloController,
-                      onSubmitted: (_) => submeterItemFilme(),
-                      decoration: const InputDecoration(
-                        labelText: 'Titulo',
-                        border: OutlineInputBorder(),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 20,
+                        bottom: 10,
                       ),
-                    ),
-                  ),
-                  Data(titulo: 'Lançado em:', dateTime: _data),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10, bottom: 10),
-                    child: TextField(
-                      controller: _diretorController,
-                      onSubmitted: submeterItemFilme(),
-                      decoration: const InputDecoration(
-                        labelText: 'Diretor',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10, bottom: 10),
-                    child: TextField(
-                      controller: _produtoraController,
-                      onSubmitted: submeterItemFilme(),
-                      decoration: const InputDecoration(
-                        labelText: 'Produtora',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10, bottom: 10),
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxHeight: 100),
-                      child: TextField(
-                        maxLines: null,
-                        controller: _sinopseController,
-                        onSubmitted: submeterItemFilme(),
+                      child: TextFormField(
+                        controller: _tituloController,
+                        onFieldSubmitted: (_) => submeterItemFilme(),
                         decoration: const InputDecoration(
-                          labelText: 'Sinopse',
+                          labelText: 'Titulo',
                           border: OutlineInputBorder(),
                         ),
+                        validator: (String? value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Titulo obrgatório';
+                          }
+                        },
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TagGenero(
-                            genero: 'Ação',
-                            aoPessionar: (aoPessionar) {
-                              _genero = aoPessionar;
-                            }),
-                        TagGenero(
-                            genero: 'Drama',
-                            aoPessionar: (aoPessionar) {
-                              _genero = aoPessionar;
-                            }),
-                        TagGenero(
-                            genero: 'Ficção',
-                            aoPessionar: (aoPessionar) {
-                              _genero = aoPessionar;
-                            }),
-                        TagGenero(
-                            genero: 'Fantasia',
-                            aoPessionar: (aoPessionar) {
-                              _genero = aoPessionar;
-                            }),
-                      ],
+                    Data(titulo: 'Lançado em:', dateTime: _data),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      child: TextFormField(
+                        controller: _diretorController,
+                        onFieldSubmitted: submeterItemFilme(),
+                        decoration: const InputDecoration(
+                          labelText: 'Diretor',
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (String? value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Diretor obrgatório';
+                          }
+                        },
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Text('Quantas estrelas você da para este filme'),
-                  WidgetDeClassificacao(
-                    aoSelecClassificacao: (aoSelecClassificacao) {
-                      _classificacao = aoSelecClassificacao;
-                    },
-                  ),
-                  SizedBox(
-                    height: 30,
-                    child: _classificacao != null && _classificacao! > 0
-                        ? Text(
-                            'Sua classificação é de $_classificacao estrela',
-                            style: const TextStyle(fontSize: 15),
-                          )
-                        : const SizedBox.shrink(),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        BotaoDeTexto(
-                          tirulo: 'Cancelar',
-                          aoPressionar: () {
-                            Navigator.pop(context);
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      child: TextFormField(
+                        controller: _produtoraController,
+                        onFieldSubmitted: submeterItemFilme(),
+                        decoration: const InputDecoration(
+                          labelText: 'Produtora',
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (String? value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Produtora obrgatório';
+                          }
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxHeight: 100),
+                        child: TextFormField(
+                          maxLines: null,
+                          controller: _sinopseController,
+                          onFieldSubmitted: submeterItemFilme(),
+                          decoration: const InputDecoration(
+                            labelText: 'Sinopse',
+                            border: OutlineInputBorder(),
+                          ),
+                          validator: (String? value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Sinopse obrgatório';
+                            }
                           },
                         ),
-                        BotaoDeTexto(
-                          tirulo: 'Adicionar filme',
-                          aoPressionar: submeterItemFilme,
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TagGenero(
+                              genero: 'Ação',
+                              aoPessionar: (aoPessionar) {
+                                _genero = aoPessionar;
+                              }),
+                          TagGenero(
+                              genero: 'Drama',
+                              aoPessionar: (aoPessionar) {
+                                _genero = aoPessionar;
+                              }),
+                          TagGenero(
+                              genero: 'Ficção',
+                              aoPessionar: (aoPessionar) {
+                                _genero = aoPessionar;
+                              }),
+                          TagGenero(
+                              genero: 'Fantasia',
+                              aoPessionar: (aoPessionar) {
+                                _genero = aoPessionar;
+                              }),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Text('Quantas estrelas você da para este filme'),
+                    WidgetDeClassificacao(
+                      aoSelecClassificacao: (aoSelecClassificacao) {
+                        _classificacao = aoSelecClassificacao;
+                      },
+                    ),
+                    SizedBox(
+                      height: 30,
+                      child: _classificacao != null && _classificacao! > 0
+                          ? Text(
+                              'Sua classificação é de $_classificacao estrela',
+                              style: const TextStyle(fontSize: 15),
+                            )
+                          : const SizedBox.shrink(),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.all(5),
+                      child: Text('*Todos os campos são obrigatórios',
+                          style: TextStyle(color: Colors.red)),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          BotaoDeTexto(
+                            tirulo: 'Cancelar',
+                            aoPressionar: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                          BotaoDeTexto(
+                            tirulo: 'Adicionar filme',
+                            aoPressionar: submeterItemFilme,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
         ),
       ),
     );
-  }
-
-  void showAlertDialog(BuildContext context) {
-    Widget botaoOk = BotaoDeTexto(
-      tirulo: 'Ok',
-      aoPressionar: () {
-        Navigator.of(context).pop();
-      },
-    );
-    AlertDialog dialog = AlertDialog(
-      actions: [botaoOk],
-      title: const Text('IMPORTANTE'),
-      content: const Text('Todos os campos devem ser preechidos!'),
-    );
-
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return dialog;
-        });
   }
 }

@@ -4,6 +4,7 @@ import 'package:app_colecao_pessoal/page/pagina_inicial.dart';
 import 'package:app_colecao_pessoal/page/pagina_navegacao.dart';
 import 'package:flutter/material.dart';
 import 'global/app_controller.dart';
+import 'package:flutter/services.dart';
 
 class MeuApp extends StatefulWidget {
   const MeuApp({super.key});
@@ -13,6 +14,12 @@ class MeuApp extends StatefulWidget {
 }
 
 class _MeuAppState extends State<MeuApp> {
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(

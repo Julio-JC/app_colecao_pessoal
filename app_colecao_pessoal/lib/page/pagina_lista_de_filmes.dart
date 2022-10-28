@@ -204,6 +204,7 @@ class _MinhaListaDeFilmesState extends State<PaginaListaDeFilmes> {
             setState(() {
               filmes.insert(posicaoItem!, itemDeletado);
             });
+            repositorioFilme.salvarListaDeFilme(filmes);
           },
         ),
         duration: const Duration(seconds: 5),
