@@ -94,6 +94,7 @@ class _PaginaAddLivrosState extends State<PaginaAddLivros> {
                             if (value == null || value.isEmpty) {
                               return 'Titulo obrgatório';
                             }
+                            return null;
                           },
                         ),
                       ),
@@ -111,6 +112,7 @@ class _PaginaAddLivrosState extends State<PaginaAddLivros> {
                             if (value == null || value.isEmpty) {
                               return 'Autor obrgatório';
                             }
+                            return null;
                           },
                         ),
                       ),
@@ -127,6 +129,7 @@ class _PaginaAddLivrosState extends State<PaginaAddLivros> {
                             if (value == null || value.isEmpty) {
                               return 'Editora obrgatório';
                             }
+                            return null;
                           },
                         ),
                       ),
@@ -146,6 +149,7 @@ class _PaginaAddLivrosState extends State<PaginaAddLivros> {
                               if (value == null || value.isEmpty) {
                                 return 'Sinopse obrgatório';
                               }
+                              return null;
                             },
                           ),
                         ),

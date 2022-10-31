@@ -93,6 +93,7 @@ class _PaginaAddFilmeState extends State<PaginaAddFilme> {
                           if (value == null || value.isEmpty) {
                             return 'Titulo obrgatório';
                           }
+                          return null;
                         },
                       ),
                     ),
@@ -110,6 +111,7 @@ class _PaginaAddFilmeState extends State<PaginaAddFilme> {
                           if (value == null || value.isEmpty) {
                             return 'Diretor obrgatório';
                           }
+                          return null;
                         },
                       ),
                     ),
@@ -126,6 +128,7 @@ class _PaginaAddFilmeState extends State<PaginaAddFilme> {
                           if (value == null || value.isEmpty) {
                             return 'Produtora obrgatório';
                           }
+                          return null;
                         },
                       ),
                     ),
@@ -145,6 +148,7 @@ class _PaginaAddFilmeState extends State<PaginaAddFilme> {
                             if (value == null || value.isEmpty) {
                               return 'Sinopse obrgatório';
                             }
+                            return null;
                           },
                         ),
                       ),

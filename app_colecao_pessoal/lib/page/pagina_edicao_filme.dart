@@ -6,6 +6,7 @@ import '../widget/data.dart';
 import '../widget/tag_genero.dart';
 import '../widget/widget_de_classificacao.dart';
 
+// ignore: must_be_immutable
 class PaginaDeEdicaoFilme extends StatefulWidget {
   PaginaDeEdicaoFilme(
       {super.key,

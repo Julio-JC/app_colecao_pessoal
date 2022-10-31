@@ -6,8 +6,10 @@ import 'package:app_colecao_pessoal/page/pagina_lista_de_livros.dart';
 import 'package:app_colecao_pessoal/page/pagina_lista_de_filmes.dart';
 import 'package:flutter/material.dart';
 import '../global/app_controller.dart';
+// ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 
+// ignore: must_be_immutable
 class PaginaInicial extends StatefulWidget {
   PaginaInicial({
     super.key,

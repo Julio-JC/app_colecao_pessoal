@@ -14,6 +14,8 @@ class PaginaAddUsuario extends StatefulWidget {
 }
 
 class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
+  final formKey = GlobalKey<FormState>();
+
   late final RepositorioUsuario repositorioUsuario;
   late final Usuario usuario;
 
@@ -35,6 +37,8 @@ class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
       diretorFavorito: _diretorFavController.text,
       generoLivroFavorito: _generoLivroController.text,
     );
+
+    formKey.currentState?.validate();
 
     repositorioUsuario.salvarUsuario(usuario);
 
@@ -61,97 +65,124 @@ class _PaginaAddUsuarioState extends State<PaginaAddUsuario> {
           child: Card(
             child: Padding(
               padding: const EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10, top: 20),
-                    child: TextField(
-                      controller: _avatarController,
-                      //onChanged: (_) => adicionarUsuario(),
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Url da Imagem',
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10, top: 20),
+                      child: TextFormField(
+                        controller: _avatarController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Url da Imagem',
+                        ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: TextField(
-                      controller: _nomeController,
-                      //onChanged: (_) => adicionarUsuario(),
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Nome',
-                      ),
-                    ),
-                  ),
-                  Data(titulo: 'Data de Nascimento', dateTime: _dataNasc),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10, bottom: 10),
-                    child: TextField(
-                      controller: _generoFilmeController,
-                      //onChanged: (_) => adicionarUsuario(),
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Gênero filme favorito',
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10, bottom: 10),
-                    child: TextField(
-                      controller: _generoLivroController,
-                      //onChanged: (_) => adicionarUsuario(),
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Gênero Livro favorito',
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10, bottom: 10),
-                    child: TextField(
-                      controller: _diretorFavController,
-                      //onChanged: (_) => adicionarUsuario(),
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Diretor favorito',
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10, bottom: 10),
-                    child: TextField(
-                      controller: _autorFavController,
-                      //onChanged: (_) => adicionarUsuario(),
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Autor favorito',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      BotaoDeTexto(
-                        tirulo: 'Cancelar',
-                        aoPressionar: () {
-                          Navigator.pushNamed(context, '/PaginaNavegacao');
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: TextFormField(
+                        controller: _nomeController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Nome',
+                        ),
+                        validator: (String? value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Nome obrigatório';
+                          }
+                          return null;
                         },
                       ),
-                      BotaoDeTexto(
-                        tirulo: 'Adicionar usuário',
-                        aoPressionar: adicionarUsuario,
+                    ),
+                    Data(titulo: 'Data de Nascimento', dateTime: _dataNasc),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      child: TextFormField(
+                        controller: _generoFilmeController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Gênero filme favorito',
+                        ),
+                        validator: (String? value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Gênero obrigatório';
+                          }
+                          return null;
+                        },
                       ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      child: TextFormField(
+                        controller: _generoLivroController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Gênero Livro favorito',
+                        ),
+                        validator: (String? value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Gênero obrigatório';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      child: TextFormField(
+                        controller: _diretorFavController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Diretor favorito',
+                        ),
+                        validator: (String? value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Diretor obrigatório';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      child: TextFormField(
+                        controller: _autorFavController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Autor favorito',
+                        ),
+                        validator: (String? value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Autor obrigatório';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        BotaoDeTexto(
+                          tirulo: 'Cancelar',
+                          aoPressionar: () {
+                            Navigator.pushNamed(context, '/PaginaNavegacao');
+                          },
+                        ),
+                        BotaoDeTexto(
+                          tirulo: 'Adicionar usuário',
+                          aoPressionar: adicionarUsuario,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
